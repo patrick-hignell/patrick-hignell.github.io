@@ -1,0 +1,81 @@
+* {
+  /*outline: 1px solid purple;*/
+  font-family: 'Eagle lake', georgia;
+  text-align: center;
+}
+
+h1 {
+  font-size: 225%;
+  padding: 10px;
+}
+
+p {
+  font-size: 150%;
+  padding: 30px;
+  font-weight: bold;
+}
+
+body {
+  background-color: #bfdbec;
+}
+
+header {
+  background-image: url('header-image.png');
+  min-height: 200px;
+}
+
+.center {
+  margin: auto;
+  width: 90%;
+}
+
+main {
+  /*min-height: 10000px;*/
+  flex: 1;
+}
+
+.container {
+  display: flex; /* Or display: grid; with appropriate grid-template-columns */
+}
+
+/* The sidebar menu */
+.sidenav {
+  width: 250px; /* Example width */
+  height: 95vh;
+  background-color: #f6f5e0;
+  padding: 20px;
+  position: sticky;
+  top: 0px;
+  /*bottom: 0px; /* Matches the header's height */
+  align-self: flex-start; /* Important for sticky in flex/grid containers */
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.sidenav::-webkit-scrollbar {
+  display: none;
+}
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #727272;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #000000;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
