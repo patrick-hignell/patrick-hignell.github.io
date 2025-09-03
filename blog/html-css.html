@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My blog</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+  <header></header>
+  <div class="container">
+    <aside class="sidenav">
+      <a href="../index.html">Home</a>
+      <a href="blog/te-houtaewa-template.html">Te-Houtaewa</a>
+      <a href="#">CSS - Display</a>
+    </aside>
+    <main>
+      <h1>Display</h1>
+      <p>The display property of an element determines how it positions itself on the page relative to nearby elements, most commonly, the elements immediately before and afterwards. We shall discuss three common display values, “block”, “inline” and “inline-block”. Many types of elements have their default display value either set to “block” or “inline”. </p>
+      <p>Block-level elements include- &lt;div&gt;,&lt;p&gt;,&lt;h1&gt;-&lt;h6&gt;,&lt;ul&gt;,&lt;ol&gt; and semantic elements such as &lt;section&gt;,&lt;article&gt;,&lt;nav&gt;,&lt;header&gt; and &lt;footer&gt;.</p>
+      <p>Inline elements include- &lt;span&gt;,&lt;a&gt;,&lt;strong&gt;,&lt;em&gt;,&lt;img&gt; and &lt;input&gt;.</p>
+      <p>When an elements display is set to block, a line break is made before and after the element and by default, the element occupies the full width of the parent, however different values for width and height can be specified.</p>
+      <div class="goblin-container">
+        <div class="goblin-inner-container">
+      <p class="goblin-p">The path you are following through the woods commes to a fork. One way leads to your destination, the other to certain death. At the fork you meet two goblin brothers</p>
+      <p class="gripbug">Gripbug</p>
+      <p class="goblin-p">and</p>
+      <p class="slugnut">Slugnut</p>
+      </div>
+      </div>
+      <p>When an elements display is set to inline, there is no line break before or after the element and width and height cannot be specified. By default the element only takes up the necessary width of the content. You can adjust margin and padding, which can increase the horizontal space between the element and surrounding elements. Vertical margin/ padding can be visualised, but has no effect on positioning.</p>
+      <div class="goblin-container">
+        <div class="goblin-inner-container">
+      <p class="goblin-p inlined">One of the brothers tells only the truth, the other only lies. They usually torment adventurers with riddles until they can decipher
+        which is the right path. Fortunately, </p>
+      <p class="gripbug inlined">Gripbug</p>
+      <p class="goblin-p inlined">and</p>
+      <p class="slugnut inlined">Slugnut</p>
+      <p class="goblin-p inlined"> joined the goblin union last year and they are currently taking full
+        advantage of their three day weekend.</p>
+      </div>
+      </div>
+      <p>When an elements display is set to inline-block, it behaves like a combination of inline and block. There is no line break before or after the element, however you are able to set a width and height, affecting the surrounding elements.</p>
+      <div class="goblin-container">
+        <div class="goblin-inner-container">
+      <p class="goblin-p inline-blocked">After helping them with their weekend chores, putting up some shelves and some other minor home improvements, </p>
+      <p class="gripbug inline-blocked">Gripbug</p>
+      <p class="goblin-p inline-blocked">and</p>
+      <p class="slugnut inline-blocked">Slugnut</p>
+      <p class="goblin-p inline-blocked"> agree to just point you in the right direction.</p>
+      </div>
+      </div>
+    </main>
+    </body>
+  </div>
+  <style>
+    .goblin-container {
+      background-color: white;
+      width: 80%;
+      justify-self: center;
+    }
+    .goblin-inner-container {
+      background-color: white;
+      width: 100%;
+      padding:20px;
+      justify-self: center;
+    }
+    .goblin-p {
+      all: revert;
+      outline: 1px solid purple;
+      background-color: rgba(128, 0, 128, 0.4);
+      margin: 10px;
+    }
+
+    .gripbug {
+      all:revert;
+      outline: 1px solid green;
+      background-color: rgba(0, 128, 0, 0.4);
+      margin: 10px;
+      padding: 10px;
+      width:100px;
+      height:40px;
+      text-align:center;
+      align-content: center;
+      justify-self: center;
+    }
+
+    .slugnut {
+      all:revert;
+      outline: 1px solid red;
+      background-color: rgba(128, 0, 0, 0.3);
+      margin: 10px;
+      padding: 10px;
+      width:80px;
+      height:60px;
+      text-align:center;
+      align-content: center;
+      justify-self: center;
+    }
+
+    .inlined {
+      display:inline;
+    }
+
+    .inline-blocked {
+      display:inline-block;
+    }
+  </style>
+</html>
