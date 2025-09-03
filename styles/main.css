@@ -21,6 +21,9 @@ body {
 
 header {
   background-image: url('header-image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
   min-height: 200px;
 }
 
@@ -71,11 +74,30 @@ main {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
+/*@media (max-height: 450px) {
   .sidenav {
     padding-top: 15px;
   }
   .sidenav a {
     font-size: 18px;
+  }
+}*/
+
+@media (max-width: 600px) {
+  .container {
+    display: block;
+  }
+  .sidenav {
+    height: auto;
+    width: auto;
+    padding: 20px 0px;
+  }
+  h1 {
+    padding: 20px 0px;
+    font-size: 150%;
+  }
+  p {
+    padding: 20px 0px;
+    font-size: 100%;
   }
 }
