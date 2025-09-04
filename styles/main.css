@@ -20,7 +20,7 @@ body {
 }
 
 header {
-  background-image: url('header-image.png');
+  background-image: url('../assets/header-image.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
