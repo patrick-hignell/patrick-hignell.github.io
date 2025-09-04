@@ -82,7 +82,6 @@ main {
     font-size: 18px;
   }
 }*/
-
 @media (max-width: 800px) {
   .container {
     display: block;
@@ -99,5 +98,21 @@ main {
   p {
     padding: 20px 0px;
     font-size: 100%;
+  }
+}
+@media (max-height: 600px) {
+  .container {
+    display: block;
+  }
+  .sidenav {
+    height: 100px;
+    width: auto;
+    padding: 20px 0px;
+  }
+  h1 {
+    padding: 20px 0px;
+  }
+  p {
+    padding: 20px 0px;
   }
 }
