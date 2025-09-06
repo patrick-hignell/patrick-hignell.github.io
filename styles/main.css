@@ -2,6 +2,7 @@
   /*outline: 1px solid purple;*/
   font-family: 'Eagle lake', georgia;
   text-align: center;
+  color: #363636;
 }
 
 h1 {
@@ -17,13 +18,15 @@ p {
 
 body {
   background-color: #bfdbec;
+  background-image: url(../assets/parchment-background-2.png);
+  background-size: cover;
 }
 
 header {
-  background-image: url('../assets/header-image.png');
+  background-image: url(../assets/village-background-2.png);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
+  background-position: 50% 40%;
   min-height: 200px;
 }
 
@@ -45,7 +48,11 @@ main {
 .sidenav {
   width: 250px; /* Example width */
   height: 95vh;
-  background-color: #f6f5e0;
+  /*background-color: #f6f5e0;*/
+  background-image: url(../assets/scroll-background.png);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 20px;
   position: sticky;
   top: 0px;
@@ -54,6 +61,8 @@ main {
   overflow-y: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  display: flex;
+  flex-direction: column;
 }
 
 .sidenav::-webkit-scrollbar {
@@ -64,13 +73,34 @@ main {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
-  color: #727272;
+  color: #454545;
   display: block;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
   color: #000000;
+  text-decoration: underline;
+}
+
+#forest-road-header {
+  background-image: url(../assets/forest-road-background.png);
+  background-position: 50% 65%;
+}
+
+#forest-floor-header {
+  background-image: url(../assets/forest-floor-background.png);
+  background-position: 50% 70%;
+}
+
+#statue-header {
+  background-image: url(../assets/statue-background.png);
+  background-position: 50% 13%;
+}
+
+#city-header {
+  background-image: url(../assets/city-background.png);
+  background-position: 50% 75%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
@@ -82,7 +112,7 @@ main {
     font-size: 18px;
   }
 }*/
-@media (max-width: 800px) {
+@media (max-width: 1200px), (max-height: 500px) {
   .container {
     display: block;
   }
@@ -90,6 +120,10 @@ main {
     height: auto;
     width: auto;
     padding: 20px 0px;
+    flex-direction: row;
+    white-space: nowrap;
+    background-image: url(../assets/scroll-background-horizontal.png);
+    background-position: bottom;
   }
   h1 {
     padding: 20px 0px;
@@ -98,21 +132,5 @@ main {
   p {
     padding: 20px 0px;
     font-size: 100%;
-  }
-}
-@media (max-height: 600px) {
-  .container {
-    display: block;
-  }
-  .sidenav {
-    height: 100px;
-    width: auto;
-    padding: 20px 0px;
-  }
-  h1 {
-    padding: 20px 0px;
-  }
-  p {
-    padding: 20px 0px;
   }
 }

@@ -13,7 +13,7 @@
     />
   </head>
   <body>
-  <header></header>
+  <header id="forest-road-header"></header>
   <div class="container">
       <!-- blog sidenav V. 1.1-->
       <aside class="sidenav">
@@ -26,8 +26,8 @@
     <main>
       <h1>Display</h1>
       <p>The display property of an element determines how it positions itself on the page relative to nearby elements, most commonly, the elements immediately before and afterwards. We shall discuss three common display values, “block”, “inline” and “inline-block”. Many types of elements have their default display value either set to “block” or “inline”. </p>
-      <p>Block-level elements include- &lt;div&gt;,&lt;p&gt;,&lt;h1&gt;-&lt;h6&gt;,&lt;ul&gt;,&lt;ol&gt; and semantic elements such as &lt;section&gt;,&lt;article&gt;,&lt;nav&gt;,&lt;header&gt; and &lt;footer&gt;.</p>
-      <p>Inline elements include- &lt;span&gt;,&lt;a&gt;,&lt;strong&gt;,&lt;em&gt;,&lt;img&gt; and &lt;input&gt;.</p>
+      <p>Block-level elements include- <span class="monospace">&lt;</span><span class="monospace blue">div</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">p</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">h1</span><span class="monospace">&gt;</span>-<span class="monospace">&lt;</span><span class="monospace blue">h6</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">ul</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">ol</span><span class="monospace">&gt;</span> and semantic elements such as <span class="monospace">&lt;</span><span class="monospace blue">section</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">article</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">nav</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">header</span><span class="monospace">&gt;</span> and <span class="monospace">&lt;</span><span class="monospace blue">footer</span><span class="monospace">&gt;</span>.</p>
+      <p>Inline elements include- <span class="monospace">&lt;</span><span class="monospace blue">span</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">a</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">strong</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">em</span><span class="monospace">&gt;</span>,<span class="monospace">&lt;</span><span class="monospace blue">img</span><span class="monospace">&gt;</span> and <span class="monospace">&lt;</span><span class="monospace blue">input</span><span class="monospace">&gt;</span>.</p>
       <p>When an elements display is set to block, a line break is made before and after the element and by default, the element occupies the full width of the parent, however different values for width and height can be specified.</p>
       <div class="goblin-container center">
         <div class="goblin-inner-container">
@@ -67,11 +67,12 @@
       background-color: white;
       width: 80%;
       justify-self: center;
+      outline: 1px solid black;
     }
     .goblin-inner-container {
       background-color: white;
       width: 100%;
-      padding:20px;
+      padding:20px 0px;
       justify-self: center;
     }
     .goblin-p {
@@ -114,5 +115,16 @@
     .inline-blocked {
       display:inline-block;
     }
+
+    .monospace {
+      color: black;
+      font-family: monospace;
+      font-size: 150%;
+    }
+
+    .blue {
+      color: blue;
+    }
+
   </style>
 </html>
