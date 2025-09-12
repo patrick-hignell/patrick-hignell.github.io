@@ -1,0 +1,20 @@
+.DOM-container {
+  background-color: white;
+  justify-self: center;
+  outline: 1px solid black;
+  height: min-content;
+  padding: 0px;
+}
+
+.DOM-text {
+  font-family: monospace;
+  display: block;
+}
+
+.name-container {
+  display: block;
+}
+
+.children-container {
+  display: inline-flex;
+}

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/javascript-dom.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,8 +26,66 @@
         <a href="javascript-dom.html">Javascript & the DOM</a>
       </aside>
       <main>
-        <!-- CONTENT GOES HERE!!!-->
+        <div class="DOM-container">
+          <div id="document-container" class="DOM-container">
+            <div class="name-container">
+              <h1 class="DOM-text">Document</h1>
+            </div>
+            <div class="children-container">
+              <div id="html-container" class="DOM-container">
+                <div class="name-container">
+                  <h2>&lt;html&gt;</h2>
+                </div>
+                <div class="children-container">
+                  <div id="head-container" class="DOM-container">
+                    <div class="name-container">
+                      <h3>&lt;head&gt;</h3>
+                    </div>
+                    <div class="children-container">
+                      <div id="name-container" class="DOM-container">
+                        <h4>&lt;title&gt;</h4>
+                        <div id="title-text-container" class="DOM-container">
+                          <h5>"My Title"</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="body-container" class="DOM-container">
+                    <div class="name-container">
+                      <h3>&lt;body&gt;</h3>
+                    </div>
+                    <div class="children-container">
+                      <div id="h1-container" class="DOM-container">
+                        <h4>&lt;h1&gt;</h4>
+                        <div id="h1-text-container" class="DOM-container">
+                          <h5>"My header"</h5>
+                        </div>
+                      </div>
+                      <div id="a-container" class="DOM-container">
+                        <div class="name-container">
+                          <h4>&lt;a&gt;</h4>
+                        </div>
+                        <div id="children-container">
+                          <div id="a-href-container" class="DOM-container">
+                            <h5>&lt;href&gt;</h5>
+                          </div>
+                          <div id="a-text-container" class="DOM-container">
+                            <h5>&lt;"My link"&gt;</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="footer-container" class="DOM-container">
+                    <h3>&lt;footer&gt;</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
+    <script src="../scripts/javascript-dom.js"></script>
   </body>
 </html>
