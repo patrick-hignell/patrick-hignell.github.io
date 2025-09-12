@@ -1,4 +1,10 @@
-const functionArray = ['getElementsByClassName', 'split', 'includes', 'push']
+const functionArray = [
+  'getElementsByClassName',
+  'split',
+  'includes',
+  'push',
+  'log',
+]
 
 const elementArray = document.getElementsByClassName('highlight')
 
@@ -8,17 +14,21 @@ for (let i = 0; i < elementArray.length; i++) {
   let error = false
   let newText
   let isQuotation = false
+  let quotationMarker = ''
   let quotationText = ''
-  let textArray = elementArray[i].innerHTML.split(/([ ,;:\[\]\(\)\"\{\}])/)
+  let textArray = elementArray[i].innerHTML.split(/([ ,;:.\[\]\(\)\"\'\{\}])/)
   let newChild
   elementArray[i].innerHTML = ''
   console.log(textArray)
   for (let j = 0; j < textArray.length; j++) {
     if (textArray[j] != '') {
       if (isQuotation == false) {
-        if (textArray[j].includes('"')) {
+        if (textArray[j].includes('"') || textArray[j].includes("'")) {
           isQuotation = true
           quotationText = textArray[j]
+          quotationMarker = textArray[j]
+        } else if (isNumeric(textArray[j]) == true) {
+          addNewSpan(elementArray[i], 'number', textArray[j])
         } else if (
           textArray[j].includes('.') ||
           textArray[j].includes(',') ||
@@ -64,14 +74,30 @@ for (let i = 0; i < elementArray.length; i++) {
           textArray[j] == 'false'
         ) {
           addNewSpan(elementArray[i], 'keyword', textArray[j])
+        } else if (
+          textArray[j] == 'if' ||
+          textArray[j] == 'else' ||
+          textArray[j] == 'for' ||
+          textArray[j] == 'switch' ||
+          textArray[j] == 'case' ||
+          textArray[j] == 'default' ||
+          textArray[j] == 'break'
+        ) {
+          addNewSpan(elementArray[i], 'statement', textArray[j])
+        } else if (functionArray.includes(textArray[j])) {
+          addNewSpan(elementArray[i], 'function', textArray[j])
         } else {
           addNewSpan(elementArray[i], 'variable', textArray[j])
         }
       } else {
-        if (textArray[j].includes('"')) {
-          isQuotation = false
-          quotationText += textArray[j]
-          addNewSpan(elementArray[i], 'string', quotationText)
+        if (textArray[j].includes('"') || textArray[j].includes("'")) {
+          if (quotationMarker === textArray[j]) {
+            isQuotation = false
+            quotationText += textArray[j]
+            addNewSpan(elementArray[i], 'string', quotationText)
+          } else {
+            quotationText += textArray[j]
+          }
         } else {
           quotationText += textArray[j]
         }
@@ -87,6 +113,14 @@ function addNewSpan(fParent, fClass, fText) {
     fChild.classList.add(fClass)
   }
   fChild.innerHTML = fText
+}
+
+function isNumeric(str) {
+  if (typeof str != 'string') return false // we only process strings!
+  return (
+    !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !isNaN(parseFloat(str))
+  ) // ...and ensure strings of whitespace fail
 }
 
 // test stuff //
@@ -111,7 +145,7 @@ switch (stubbornness) {
     console.log('you might not pass!')
     break
   case 3:
-    console.log('pass or not pass, I don’t care!')
+    console.log("pass or not pass, I don't care!")
     break
   case 2:
     console.log('you could pass if you wanted to!')
@@ -120,7 +154,7 @@ switch (stubbornness) {
     console.log('I would really love it if you would pass!')
     break
   default:
-    console.log('I don’t know how I feel about you passing!')
+    console.log("I don't know how I feel about you passing!")
     break
 }
 

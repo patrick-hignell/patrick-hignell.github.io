@@ -58,8 +58,14 @@
   color: #9cdcf0;
   font-family: monospace;
 }
+
 .punctuation {
   color: white;
+  font-family: monospace;
+}
+
+.statement {
+  color: #b670d6;
   font-family: monospace;
 }
 

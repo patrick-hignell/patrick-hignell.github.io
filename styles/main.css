@@ -90,7 +90,7 @@ main {
 
 #forest-floor-header {
   background-image: url(../assets/forest-floor-background.png);
-  background-position: 50% 70%;
+  background-position: 50% 60%;
 }
 
 #statue-header {
@@ -101,6 +101,11 @@ main {
 #city-header {
   background-image: url(../assets/city-background.png);
   background-position: 50% 75%;
+}
+
+#wizard-header {
+  background-image: url(../assets/wizard-background-2.png);
+  background-position: 50% 22%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
