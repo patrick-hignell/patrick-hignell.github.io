@@ -26,7 +26,45 @@
         <a href="javascript-dom.html">Javascript & the DOM</a>
       </aside>
       <main>
-        <div class="DOM-container">
+        <h1 class="center">JavaScript & the DOM</h1>
+        <p class="center">By now you should be familiar with HTML and CSS, the former gives the basic information and structure to a webpage, the latter makes it look nicer and easier to interact with. For some websites, those are all of the ingredients you need. However if you want some more advanced actions to occur on your website, for example, things to move around, messages to pop up or really the webpage to change in any way after loading, you will need JavaScript.</p>
+        <p class="center">If HTML is the skeleton and CSS is the skin, JavaScript is the muscle.</p>
+        <p class="center">First thing to note, if you have heard of the coding language Java before, just know that Java and JavaScript are different languages! JavaScript uses various pieces of logic to enable complex interactions with the webpage. These include variables, arrays, objects, conditional statements, loops and functions-</p>
+        <p class="center">Variables- store data values which can be manipulated and compared. Examples include bools (true or false), integers (whole numbers), floats (numbers with decimal points) and strings (words or sentences). Declared using let (for variables that can later be changes) and const (for variables which will remain the same after declaration). If you see a variable being declared by var, this is an old way of declaring and is advised against as it does not specify if the variable should be able to be changed or not.</p>
+        <div class="example-container">
+          <p class="monospace"><span class="keyword">const</span> <span class="variable">name</span> = <span class="string">"Nigel the Magnificent"</span></p>
+          <p class="monospace"><span class="keyword">let</span> <span class="variable">age</span> = <span class="number">111</span></p>
+        </div>
+        <p class="center">Arrays- lists of variables. Can contain any variable or a mix of different variables. Declared by surrounding variables in square brackets [], separated by commas. Can be accessed by referring to the index of the variable. Note indexes are counted starting at 0. You can use methods to change an array such as push() which adds to the end of the array and pop() which removes the last variable from the array. Note, declaring an array as const means that it cannot be assigned a completely new array, however the variables within the array can be changed and the array can still be added to and removed from.</p>
+        <div class="example-container">
+          <p class="monospace"><span class="keyword">const</span> <span class="variable">magicTricks</span> = 
+            <span class="bracket-1">[</span><span class="string">"one card monte"</span> , <span class="string">"52 card pick up"</span> , <span class="string">"dude wheres my car?"</span> , 
+            <span class="string">"pulling a hat out of a rabbit"</span> , <span class="string">"I'll do this with my hands"</span><span class="bracket-1">]</span></p>
+          <p class="monospace"><span class="variable">magicTricks</span><span class="bracket-1">[</span><span class="number">3</span><span class="bracket-1">]</span> = 
+            <span class="string">"something less horrifying for the children"</span></p>
+          <p class="monospace"><span class="variable">magicTricks</span><span class="function">.push</span><span class="bracket-1">&#40;</span><span class="string">"cutting a pigeon in half with a stick"</span><span class="bracket-1">&#41;</span></p>
+        </div>
+        <p class="center"></p>
+        <div class="example-container">
+          <p class="monospace highlight">const magicTricks = ["one card monte" , "52 card pick up" , "dude wheres my car?" , "pulling a hat out of a rabbit" , "I'll do this with my hands"]&#40;&#41;&lbrace;&lbrace;&lbrace;&lbrace;&rbrace;&rbrace;&rbrace;&rbrace;</p>
+          <p class="monospace highlight">const minion = &lbrace;</p>
+          <p class="monospace highlight">name: 'Jeff' ,</p>
+          <p class="monospace highlight">age: 33 ,</p>
+          <p class="monospace highlight">mainTask: 'nose picker' &rbrace;</p>
+        </div>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+        <p class="center"></p>
+
+
+
+       <!-- <div class="DOM-container">
           <div id="document-container" class="DOM-container">
             <div class="name-container">
               <h1 class="DOM-text">Document</h1>
@@ -85,7 +123,7 @@
           </div>
         </div>
       </main>
-    </div>
+    </div> -->
     <script src="../scripts/javascript-dom.js"></script>
   </body>
 </html>

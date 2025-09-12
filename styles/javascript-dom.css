@@ -1,4 +1,69 @@
-.DOM-container {
+.example-container {
+  background-color: black;
+  width: 80%;
+  justify-self: center;
+  outline: 1px solid white;
+}
+
+.monospace {
+  color: white;
+  font-family: monospace;
+  font-size: 150%;
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.number {
+  color: #b5cea8;
+  font-family: monospace;
+}
+
+.string {
+  color: #ce915e;
+  font-family: monospace;
+}
+
+.keyword {
+  color: #3a8cd6;
+  font-family: monospace;
+}
+
+.function {
+  color: #dcdcaa;
+  font-family: monospace;
+}
+
+.bracket-1 {
+  color: #ffd700;
+  font-family: monospace;
+}
+
+.bracket-2 {
+  color: #b670d6;
+  font-family: monospace;
+}
+
+.bracket-3 {
+  color: #1e6af1;
+  font-family: monospace;
+}
+
+.variable {
+  color: #9cdcf0;
+  font-family: monospace;
+}
+
+.default {
+  color: #9cdcf0;
+  font-family: monospace;
+}
+.punctuation {
+  color: white;
+  font-family: monospace;
+}
+
+/*  .DOM-container {
   background-color: white;
   justify-self: center;
   outline: 1px solid black;
@@ -18,3 +83,4 @@
 .children-container {
   display: inline-flex;
 }
+*/
