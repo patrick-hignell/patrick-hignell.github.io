@@ -158,6 +158,11 @@ switch (stubbornness) {
     break
 }
 
+let psychicLinkDuration = 20
+for (let i = 0; i < psychicLinkDuration; i++) {
+  console.log('Hold the door!')
+}
+
 //const name = "Nigel the Magnificent"
 //
 //let age = 111
