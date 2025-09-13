@@ -69,6 +69,11 @@
   font-family: monospace;
 }
 
+.comment {
+  color: #b670d6;
+  font-family: monospace;
+}
+
 /*  .DOM-container {
   background-color: white;
   justify-self: center;

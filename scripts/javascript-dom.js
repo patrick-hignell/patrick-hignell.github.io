@@ -11,17 +11,19 @@ const elementArray = document.getElementsByClassName('highlight')
 let bracketCount = 1
 
 for (let i = 0; i < elementArray.length; i++) {
-  let error = false
-  let newText
   let isQuotation = false
+  let isComment = false
   let quotationMarker = ''
   let quotationText = ''
-  let textArray = elementArray[i].innerHTML.split(/([ ,;:.\[\]\(\)\"\'\{\}])/)
-  let newChild
+  let commentText = ''
+  let rawText = elementArray[i].innerHTML.trim()
+  rawText = replaceLtGt(rawText)
+  rawText = RemoveNonSpaceWhitespace(rawText)
+  let textArray = rawText.split(/([ ,;:.+-/*<>\[\]\(\)\"\'\{\}])/)
   elementArray[i].innerHTML = ''
   console.log(textArray)
   for (let j = 0; j < textArray.length; j++) {
-    if (textArray[j] != '') {
+    if (isComment == false) {
       if (isQuotation == false) {
         if (textArray[j].includes('"') || textArray[j].includes("'")) {
           isQuotation = true
@@ -33,7 +35,14 @@ for (let i = 0; i < elementArray.length; i++) {
           textArray[j].includes('.') ||
           textArray[j].includes(',') ||
           textArray[j].includes('=') ||
-          textArray[j].includes(':')
+          textArray[j].includes(':') ||
+          textArray[j].includes(';') ||
+          textArray[j].includes('+') ||
+          textArray[j].includes('-') ||
+          textArray[j].includes('/') ||
+          textArray[j].includes('*') ||
+          textArray[j].includes('<') ||
+          textArray[j].includes('>')
         ) {
           addNewSpan(elementArray[i], 'punctuation', textArray[j])
         } else if (
@@ -44,14 +53,12 @@ for (let i = 0; i < elementArray.length; i++) {
           if (bracketCount > 3) {
             bracketCount = 1
           }
-          console.log(bracketCount)
           addNewSpan(
             elementArray[i],
             'bracket-' + bracketCount.toString(),
             textArray[j]
           )
           bracketCount++
-          console.log(bracketCount)
         } else if (
           textArray[j].includes('}') ||
           textArray[j].includes(']') ||
@@ -61,7 +68,6 @@ for (let i = 0; i < elementArray.length; i++) {
           if (bracketCount < 1) {
             bracketCount = 3
           }
-          console.log(bracketCount)
           addNewSpan(
             elementArray[i],
             'bracket-' + bracketCount.toString(),
@@ -102,6 +108,7 @@ for (let i = 0; i < elementArray.length; i++) {
           quotationText += textArray[j]
         }
       }
+    } else {
     }
   }
 }
@@ -123,45 +130,39 @@ function isNumeric(str) {
   ) // ...and ensure strings of whitespace fail
 }
 
+function replaceLtGt(fText) {
+  fText = fText.replaceAll('&gt;', '<')
+  fText = fText.replaceAll('&lt;', '>')
+  return fText
+}
+
+//function isNonSpaceWhitespace(fText) {
+//  if (/\s/.test(fText) === true && fText !== ' ') {
+//    return true
+//  } else {
+//    return false
+//  }
+//}
+
+function RemoveNonSpaceWhitespace(ftext) {
+  ftext = ftext.replaceAll(' ', '$pacejam')
+  ftext = ftext.replaceAll(/\s/g, '')
+  ftext = ftext.replaceAll('$pacejam', ' ')
+  return ftext
+}
 // test stuff //
-const minion = {
-  name: 'Jeff',
-  age: 33,
-  mainTask: 'nose picker',
-}
 
-let amIAConjurerOfCheapTricks = false
-if (amIAConjurerOfCheapTricks == false) {
-  console.log('I am not trying to rob you, I am trying to help you')
-} else {
-  Console.log('I am not trying to help you, I am trying to rob you')
-}
-let stubbornness = 5
-switch (stubbornness) {
-  case 5:
-    console.log('you shall not pass!')
-    break
-  case 4:
-    console.log('you might not pass!')
-    break
-  case 3:
-    console.log("pass or not pass, I don't care!")
-    break
-  case 2:
-    console.log('you could pass if you wanted to!')
-    break
-  case 1:
-    console.log('I would really love it if you would pass!')
-    break
-  default:
-    console.log("I don't know how I feel about you passing!")
-    break
-}
+const magicTricks = [
+  'one card monte',
+  '52 card pick up',
+  'dude wheres my car?',
+  'pulling a hat out of a rabbit',
+  "I'll do this with my hands",
+]
 
-let psychicLinkDuration = 20
-for (let i = 0; i < psychicLinkDuration; i++) {
-  console.log('Hold the door!')
-}
+magicTricks[3] = 'something less horrifying for the children'
+
+magicTricks.push('cutting a pigeon in half with a stick')
 
 //const name = "Nigel the Magnificent"
 //
