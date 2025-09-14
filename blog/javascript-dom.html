@@ -58,18 +58,10 @@
         </p>
         <div class="center example-container">
           <p class="monospace highlight">
-            const magicTricks = ["one card monte" , "52 card pick up" , "dude
-            wheres my car?" , "pulling a hat out of a rabbit" , "I'll do this
-            with my hands"]
+            const name = 'Nigel the Magnificent'
           </p>
           <p class="monospace highlight"></p>
-          <p class="monospace highlight">
-            magicTricks[3] = "something less horrifying for the children"
-          </p>
-          <p class="monospace highlight"></p>
-          <p class="monospace highlight">
-            magicTricks.push&#40;"cutting a pigeon in half with a stick"&#41;
-          </p>
+          <p class="monospace highlight">let age = 111</p>
         </div>
         <p class="center">
           Arrays- lists of variables. Can contain any variable or a mix of
@@ -82,95 +74,253 @@
           completely new array, however the variables within the array can be
           changed and the array can still be added to and removed from.
         </p>
-
-        <p class="center"></p>
         <div class="center example-container">
-          <p class="monospace highlight">
-            const magicTricks = ["one card monte" , "52 card pick up" , "dude
-            wheres my car?" , "pulling a hat out of a rabbit" , "I'll do this
-            with my
-            hands"]&#40;&#41;&lbrace;&lbrace;&lbrace;&lbrace;&rbrace;&rbrace;&rbrace;&rbrace;
+          <p class="monospace highlight">const magicTricks = [</p>
+          <p class="monospace highlight text-indent-1">'one card monte',</p>
+          <p class="monospace highlight text-indent-1">'52 card pick up',</p>
+          <p class="monospace highlight text-indent-1">
+            'dude wheres my car?',
           </p>
-          <p class="monospace highlight">const minion = &lbrace;</p>
-          <p class="monospace highlight">&emsp;&emsp;name: 'Bilbo' ,</p>
-          <p class="monospace highlight">&emsp;&emsp;age: 50 ,</p>
-          <p class="monospace highlight">&emsp;&emsp;profession: 'burglar'</p>
-          <p class="monospace highlight">&rbrace;</p>
+          <p class="monospace highlight text-indent-1">
+            'pulling a hat out of a rabbit',
+          </p>
+          <p class="monospace highlight text-indent-1">
+            "I'll do this with my hands",
+          </p>
+          <p class="monospace highlight">]</p>
+          <p class="monospace highlight">
+            magicTricks[3] = 'something less horrifying for the children'
+          </p>
+          <p class="monospace highlight">
+            magicTricks.push&#40;'cutting a pigeon in half with a stick'&#41;
+          </p>
+          <p class="monospace highlight">
+            let favouriteTrick = magicTricks[0] //favouriteTrick is now "one
+            card monte"
+          </p>
         </div>
-        <p class="center"></p>
+        <p class="center">
+          Objects- like an array, it is a variable that can hold many variables,
+          however unlike an array, these are not accessible through a particular
+          index but through key-value pairs where each key (or property name)
+          has a different value. Declared by surrounding variables in curly
+          brackets {}, separated by commas, each key denoting its value with a
+          colon. Variables are accessible either by using
+          objectName.propertyName or objectName["propertyName"]. The former is
+          usually easier to type out however the latter can be powerful as a
+          changeable variable can be put in place of the property name so what
+          is accessed can change depending on the situation.
+        </p>
+        <div class="center example-container">
+          <p class="monospace highlight">const minion = &lbrace;</p>
+          <p class="monospace highlight text-indent-1">name: 'Bilbo',</p>
+          <p class="monospace highlight text-indent-1">age: 50,</p>
+          <p class="monospace highlight text-indent-1">
+            profession: 'Burglar',
+          </p>
+          <p class="monospace highlight">&rbrace;</p>
+          <p class="monospace highlight">
+            console.log&#40;minion.name&#41; // will log "Bilbo"
+          </p>
+          <p class="monospace highlight">
+            console.log&#40;minion['age']&#41; // will log "50"
+          </p>
+          <p class="monospace highlight">let selectedProperty = 'profession'</p>
+          <p class="monospace highlight">
+            console.log&#40;minion[selectedProperty]&#41; // will log "Burglar"
+          </p>
+        </div>
+        <p class="center">
+          Before we talk about loops and functions, we should first talk about
+          the "control flow". The control flow is the order in which the
+          statements in the code are executed. The default flow is for the
+          computer to read the script from the beginning to the end, top to
+          bottom, just like reading a book. There are however certain statements
+          that it can come across which alters the flow-
+        </p>
+        <p class="center">
+          Conditional statements- such as If/else can mean that different
+          sections of the code can be run or ignored depending on whether
+          criteria are true or false. Operators can be used such as == or ===
+          for loose or strict equality, &gt; or &lt; for greater than or lesser
+          that etc.
+        </p>
         <div class="center example-container">
           <p class="monospace highlight">
             let amIAConjurerOfCheapTricks = false
           </p>
           <p class="monospace highlight">
-            if (amIAConjurerOfCheapTricks == false) &lbrace;
+            if &#40;amIAConjurerOfCheapTricks == false&#41; &lbrace;
           </p>
-          <p class="monospace highlight">
-            &emsp;&emsp;console.log('I am not trying to rob you, I am trying to
-            help you')
+          <p class="monospace highlight text-indent-1">
+            console.log&#40;'I am not trying to rob you, I am trying to help
+            you'&#41;
           </p>
           <p class="monospace highlight">&rbrace; else &lbrace;</p>
-          <p class="monospace highlight">
-            &emsp;&emsp;console.log('I am not trying to help you, I am trying to
-            rob you')
+          <p class="monospace highlight text-indent-1">
+            Console.log&#40;'I am not trying to help you, I am trying to rob
+            you'&#41;
           </p>
-          <p class="monospace highlight">&rbrace;</p>
+          <p class="monospace highlight">
+            &rbrace; // will log "I am not trying to rob you, I am trying to
+            help you"
+          </p>
         </div>
-        <p class="center"></p>
+        <p class="center">
+          Switch statements can also be used to perform one of a number of
+          different actions depending on the value of a variable.
+        </p>
         <div class="center example-container">
           <p class="monospace highlight">let stubbornness = 5</p>
-          <p class="monospace highlight">switch (stubbornness) &lbrace;</p>
-          <p class="monospace highlight">&emsp;&emsp;case 5:</p>
           <p class="monospace highlight">
-            &emsp;&emsp;&emsp;&emsp;console.log("you shall not pass!")
+            switch &#40;stubbornness&#41; &lbrace;
           </p>
-          <p class="monospace highlight">&emsp;&emsp;&emsp;&emsp;break</p>
-          <p class="monospace highlight">&emsp;&emsp;case 4:</p>
+          <p class="monospace highlight text-indent-1">case 5:</p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"you shall not pass!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">break</p>
+          <p class="monospace highlight text-indent-1">case 4:</p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"you might not pass!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">break</p>
+          <p class="monospace highlight text-indent-1">case 3:</p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"pass or not pass, I don't care!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">break</p>
+          <p class="monospace highlight text-indent-1">case 2:</p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"you could pass if you wanted to!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">break</p>
+          <p class="monospace highlight text-indent-1">case 1:</p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"I would really love it if you would pass!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">break</p>
+          <p class="monospace highlight text-indent-1">default:</p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"I don't know how I feel about you passing!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">break</p>
           <p class="monospace highlight">
-            &emsp;&emsp;&emsp;&emsp;console.log("you might not pass!")
+            &rbrace; // will log "you shall not pass!"
           </p>
-          <p class="monospace highlight">&emsp;&emsp;&emsp;&emsp;break</p>
-          <p class="monospace highlight">&emsp;&emsp;case 3:</p>
-          <p class="monospace highlight">
-            &emsp;&emsp;&emsp;&emsp;console.log("pass or not pass, I don't
-            care!")
-          </p>
-          <p class="monospace highlight">&emsp;&emsp;&emsp;&emsp;break</p>
-          <p class="monospace highlight">&emsp;&emsp;case 2:</p>
-          <p class="monospace highlight">
-            &emsp;&emsp;&emsp;&emsp;console.log("you could pass if you wanted
-            to!")
-          </p>
-          <p class="monospace highlight">&emsp;&emsp;&emsp;&emsp;break</p>
-          <p class="monospace highlight">&emsp;&emsp;case 1:</p>
-          <p class="monospace highlight">
-            &emsp;&emsp;&emsp;&emsp;console.log("I would really love it if you
-            would pass!")
-          </p>
-          <p class="monospace highlight">&emsp;&emsp;&emsp;&emsp;break</p>
-          <p class="monospace highlight">&emsp;&emsp;default:</p>
-          <p class="monospace highlight">
-            &emsp;&emsp;&emsp;&emsp;console.log("I don't know how I feel about
-            you passing!")
-          </p>
-          <p class="monospace highlight">&emsp;&emsp;&emsp;&emsp;break</p>
-          <p class="monospace highlight">&rbrace;</p>
         </div>
-        <p class="center"></p>
+        <p class="center">
+          Loops- loops are used to go over and over a certain section of code
+          until certain conditions are met. A common example is a "for loop" in
+          which an iterator is generally increased every time a loop is
+          completed, and once the iterator reaches a certain number, the loop
+          finishes. Think about doing weights at the gym. You set yourself a
+          target of 20 reps and until that target is reached, each loop you will
+          perform the action of lifting the weight. You might even count under
+          your breath until you reach the target and then you stop the loop and
+          move on to the next exercise.
+        </p>
         <div class="center example-container">
           <p class="monospace highlight">let psychicLinkDuration = 20</p>
           <p class="monospace highlight">
             for &#40;let i = 0; i &lt; psychicLinkDuration; i++&#41; &lbrace;
           </p>
-          <p class="monospace highlight">
-            console.log&#40;"Hold the door!"&#41;
+          <p class="monospace highlight text-indent-1">
+            console.log&#40;'Hold the door!'&#41;
           </p>
-          <p class="monospace highlight">&rbrace;</p>
+          <p class="monospace highlight">
+            &rbrace; // will log 'Hold the door!' x 20
+          </p>
         </div>
-        <p class="center"></p>
-        <p class="center"></p>
-        <p class="center"></p>
-        <p class="center"></p>
+        <p class="center">
+          Functions- functions are a section of code which can be repeated as
+          often as it is called. It is useful for actions which occur a number
+          of times or it is not known haw many times they will need to be
+          called. Functions can take parameters which are variables which could
+          change aspects of the function or be altered in some way and returned.
+          To declare a function you must start with the keyword function,
+          followed by the functions name. This is followed by parentheses ()
+          which if there are any parameters should be included between the
+          parentheses, separated by commas. Finally the function itself is
+          included between curly brackets {}. To return a value, use the keyword
+          return within the curly brackets before the value that is to be
+          returned. Crucially, a function is not performed until it is invoked.
+          You can invoke a function by writing in the code the name of the
+          function followed by parentheses containing the parameters you wish to
+          be used in the function (or just () if there are no parameters).
+        </p>
+        <div class="center example-container">
+          <p class="monospace highlight">let spell = 'wingardium leviosaar'</p>
+          <p class="monospace highlight">let featherFloating = false</p>
+          <p class="monospace highlight">
+            function checkSpell&#40;testSpell&#41; &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            if &#40;testSpell == 'wingardium leviosa'&#41; &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-2">
+            featherFloating = true
+          </p>
+          <p class="monospace highlight text-indent-1">
+            &rbrace; else &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;"It's wingardium leviosa, not " + testSpell +
+            "!"&#41;
+          </p>
+          <p class="monospace highlight text-indent-1">&rbrace;</p>
+          <p class="monospace highlight">&rbrace;</p>
+          <p class="monospace highlight">
+            checkSpell&#40;spell&#41; // will log "It's wingardium leviosa, not
+            wingardium leviosaar!"
+          </p>
+        </div>
+        <p class="center">
+          Lastly we should discuss how JavaScript can actually be used to
+          interact and alter information displayed on a website and so we must
+          discuss the DOM! The DOM or Document Object Model is the programming
+          interface through which scripts using languages such as HTML and
+          JavaScript can interact with a webpage. It is essentially a hierarchy
+          or genealogy of the objects which make up the webpage, each object
+          located on its own node, with a parent node above it (except for the
+          document) and for some nodes one or more child nodes below it. A
+          common type of node is an element such as the HTML elements
+          <span class="monospace-black">&lt;body&gt;</span>,
+          <span class="monospace-black">&lt;div&gt;</span>
+          <span class="monospace-black">&lt;table&gt;</span> etc. Every element
+          is a node but not all nodes are elements. Non element nodes include-
+        </p>
+        <p class="center">
+          Text Nodes: The text within an element. E.g. in
+          <span class="monospace-black">&lt;p>Hello World&lt;/p&gt;</span>,
+          "Hello World" is a text node.
+        </p>
+        <p class="center">
+          Comment Nodes: Comments within the HTML, e.g.
+          <span class="monospace-black">&lt;!-- This is a comment --&gt;</span>
+        </p>
+        <p class="center">Document Nodes: the document itself.</p>
+        <p class="center">
+          Attribute Nodes: attributes of an element. E.g. id/ class.
+        </p>
+        <p class="center">
+          DocumentType Nodes: The declaration of the type of document. E.g.
+          <span class="monospace-black">&lt;!DOCTYPE html&gt;</span>
+        </p>
+        <p class="center"><img src="../assets/DOM-image.png" /></p>
+        <p class="center">
+          JavaScript can be used to interact with the DOM in various ways. You
+          can use event listeners so that a script will run when a particular
+          event is performed by the user (e.g. a button is clicked) or change or
+          add HTML elements by using document.getElementByID("Example-ID") which
+          returns a single element by that id or
+          document.GetElementByClassName("example-class") which returns an
+          array. You can then for example change the text within the element
+          (e.g. using document.getElementByID("todaysLesson").innerHTML =
+          "Transfiguration") or add a class which could then result in a
+          different aesthetic by using CSS (e.g. using
+          document.GetElementByClassName(")[0].classList.add("invisible")).
+        </p>
         <p class="center"></p>
         <p class="center"></p>
 

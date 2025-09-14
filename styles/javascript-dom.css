@@ -1,12 +1,21 @@
 .example-container {
   background-color: black;
-  width: 80%;
-  justify-self: center;
+  /*width: 80%;
+  justify-self: center;*/
   outline: 1px solid white;
 }
 
 .monospace {
   color: white;
+  font-family: monospace;
+  font-size: 150%;
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.monospace-black {
+  color: black;
   font-family: monospace;
   font-size: 150%;
   text-align: left;
@@ -52,6 +61,7 @@
 .variable {
   color: #9cdcf0;
   font-family: monospace;
+  white-space: pre;
 }
 
 .default {
@@ -70,7 +80,7 @@
 }
 
 .comment {
-  color: #b670d6;
+  color: #549955;
   font-family: monospace;
 }
 

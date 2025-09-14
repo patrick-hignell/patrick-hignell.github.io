@@ -9,23 +9,43 @@ const functionArray = [
 const elementArray = document.getElementsByClassName('highlight')
 
 let bracketCount = 1
-
+let isComment = false
+let commentMarker = ''
 for (let i = 0; i < elementArray.length; i++) {
   let isQuotation = false
-  let isComment = false
+  if (commentMarker !== '/*') {
+    isComment = false
+    commentMarker = ''
+  }
   let quotationMarker = ''
   let quotationText = ''
   let commentText = ''
   let rawText = elementArray[i].innerHTML.trim()
   rawText = replaceLtGt(rawText)
   rawText = RemoveNonSpaceWhitespace(rawText)
+  rawText = AddIndent(elementArray[i], rawText)
   let textArray = rawText.split(/([ ,;:.+-/*<>\[\]\(\)\"\'\{\}])/)
+  textArray = RemoveNaNFromArray(textArray)
   elementArray[i].innerHTML = ''
-  console.log(textArray)
+  //console.log(textArray)
   for (let j = 0; j < textArray.length; j++) {
     if (isComment == false) {
       if (isQuotation == false) {
-        if (textArray[j].includes('"') || textArray[j].includes("'")) {
+        if (textArray[j].includes('/')) {
+          if (textArray[j + 1].includes('/')) {
+            //console.log('//')
+            isComment = true
+            commentMarker = '//'
+            commentText = textArray[j]
+          } else if (textArray[j + 1].includes('*')) {
+            isComment = true
+            commentMarker = '/*'
+            commentText = textArray[j]
+          } else {
+            addNewSpan(elementArray[i], 'punctuation', textArray[j])
+          }
+        } else if (textArray[j].includes('*')) {
+        } else if (textArray[j].includes('"') || textArray[j].includes("'")) {
           isQuotation = true
           quotationText = textArray[j]
           quotationMarker = textArray[j]
@@ -39,7 +59,6 @@ for (let i = 0; i < elementArray.length; i++) {
           textArray[j].includes(';') ||
           textArray[j].includes('+') ||
           textArray[j].includes('-') ||
-          textArray[j].includes('/') ||
           textArray[j].includes('*') ||
           textArray[j].includes('<') ||
           textArray[j].includes('>')
@@ -109,6 +128,24 @@ for (let i = 0; i < elementArray.length; i++) {
         }
       }
     } else {
+      if (
+        j > 0 &&
+        textArray[j].includes('/') &&
+        textArray[j - 1].includes('*')
+      ) {
+        isComment = false
+        commentText += textArray[j]
+        addNewSpan(elementArray[i], 'comment', commentText)
+      } else {
+        commentText += textArray[j]
+      }
+    }
+    if (j == textArray.length - 1) {
+      if (isComment == true) {
+        addNewSpan(elementArray[i], 'comment', commentText)
+      } else if (isQuotation == true) {
+        addNewSpan(elementArray[i], 'string', quotationText)
+      }
     }
   }
 }
@@ -144,13 +181,48 @@ function replaceLtGt(fText) {
 //  }
 //}
 
-function RemoveNonSpaceWhitespace(ftext) {
-  ftext = ftext.replaceAll(' ', '$pacejam')
-  ftext = ftext.replaceAll(/\s/g, '')
-  ftext = ftext.replaceAll('$pacejam', ' ')
-  return ftext
+function RemoveNonSpaceWhitespace(fText) {
+  fText = fText.replaceAll(/\n\s+/g, ' ')
+  return fText
+}
+
+function RemoveNaNFromArray(fArray) {
+  fArray = fArray.filter((element) => element !== '')
+  //console.log(fArray)
+  return fArray
+}
+
+//function removeCharAtIndex(str, index) {
+//  if (index < 0 || index >= str.length) {
+//    console.error('Index out of bounds.')
+//    return str // Return original string if index is invalid
+//  }
+//  return str.slice(0, index) + str.slice(index + 1)
+//}
+
+function AddIndent(fElement, fText) {
+  let fIndentNumber = 0
+  let fClassNameString = ''
+  let fNewText = ''
+  let fClassNameArray = Array.from(fElement.classList)
+  for (const className of fClassNameArray) {
+    if (className.includes('text-indent-') == true) {
+      fIndentNumber = Number(className[className.length - 1])
+    }
+  }
+  for (let l = 0; l < fIndentNumber; l++) {
+    fNewText += '  '
+    fText = fNewText + fText
+    //console.log(fText)
+  }
+
+  return fText
 }
 // test stuff //
+
+const name = 'Nigel the Magnificent'
+
+let age = 111
 
 const magicTricks = [
   'one card monte',
@@ -159,17 +231,61 @@ const magicTricks = [
   'pulling a hat out of a rabbit',
   "I'll do this with my hands",
 ]
-
 magicTricks[3] = 'something less horrifying for the children'
-
 magicTricks.push('cutting a pigeon in half with a stick')
+let favouriteTrick = magicTricks[0] //favouriteTrick is now "one card monte"
 
-//const name = "Nigel the Magnificent"
-//
-//let age = 111
-//
-//
-//const magicTricks = ["one card monte", "52 card pick up", "dude wheres my car?", "pulling a hat out of a rabbit", "I'll do this with my hands"]
-//magicTricks[3] = "something less horrifying for the children"
-//magicTricks.push("cutting a pigeon in half with a stick")
-//let favouriteTrick = magicTricks[0] //favouriteTrick is now "one card monte"
+const minion = {
+  name: 'Bilbo',
+  age: 50,
+  profession: 'Burglar',
+}
+console.log(minion.name) // will log "Bilbo"
+console.log(minion['age']) // will log "50"
+let selectedProperty = 'profession'
+console.log(minion[selectedProperty]) // will log "Burglar"
+
+let amIAConjurerOfCheapTricks = false
+if (amIAConjurerOfCheapTricks == false) {
+  console.log('I am not trying to rob you, I am trying to help you')
+} else {
+  Console.log('I am not trying to help you, I am trying to rob you')
+} // will log "I am not trying to rob you, I am trying to help you"
+
+let stubbornness = 5
+switch (stubbornness) {
+  case 5:
+    console.log('you shall not pass!')
+    break
+  case 4:
+    console.log('you might not pass!')
+    break
+  case 3:
+    console.log("pass or not pass, I don't care!")
+    break
+  case 2:
+    console.log('you could pass if you wanted to!')
+    break
+  case 1:
+    console.log('I would really love it if you would pass!')
+    break
+  default:
+    console.log("I don't know how I feel about you passing!")
+    break
+} // will log 'you shall not pass!'
+
+let psychicLinkDuration = 20
+for (let i = 0; i < psychicLinkDuration; i++) {
+  console.log('Hold the door!')
+} // will log 'Hold the door!' x 20
+
+let spell = 'wingardium leviosaar'
+let featherFloating = false
+function checkSpell(testSpell) {
+  if (testSpell == 'wingardium leviosa') {
+    featherFloating = true
+  } else {
+    console.log("It's wingardium leviosa, not " + testSpell + '!')
+  }
+}
+checkSpell(spell) // will log "It's wingardium leviosa, not wingardium leviosaar!"
