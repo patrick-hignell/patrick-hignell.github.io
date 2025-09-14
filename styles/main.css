@@ -6,14 +6,31 @@
 }
 
 h1 {
-  font-size: 225%;
+  font-size: 2.25rem;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 2rem;
   padding: 10px;
 }
 
 p {
-  font-size: 150%;
+  font-size: 1.5rem;
   padding: 20px;
   font-weight: bold;
+}
+
+li {
+  font-size: 1.5rem;
+  padding: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.img {
+  width: auto;
+  max-width: 100%;
 }
 
 body {
@@ -130,12 +147,25 @@ main {
     background-image: url(../assets/scroll-background-horizontal.png);
     background-position: bottom;
   }
-  h1 {
+  /*  h1 {
     padding: 20px 0px;
-    font-size: 150%;
+    font-size: 1.75rem;
   }
+  h2 {
+  font-size: 2rem;
+  padding: 10px;
+}
   p {
     padding: 20px 0px;
-    font-size: 100%;
+    font-size: 1rem;
+  }
+  li {
+  font-size: 1.5rem;
+  padding: 20px;
+  font-weight: bold;
+  text-align: left;
+} */
+  :root {
+    font-size: 0.8em;
   }
 }
