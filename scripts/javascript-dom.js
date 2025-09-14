@@ -4,6 +4,7 @@ const functionArray = [
   'includes',
   'push',
   'log',
+  'checkSpell',
 ]
 
 const elementArray = document.getElementsByClassName('highlight')
@@ -96,7 +97,8 @@ for (let i = 0; i < elementArray.length; i++) {
           textArray[j] == 'let' ||
           textArray[j] == 'const' ||
           textArray[j] == 'true' ||
-          textArray[j] == 'false'
+          textArray[j] == 'false' ||
+          textArray[j] == 'function'
         ) {
           addNewSpan(elementArray[i], 'keyword', textArray[j])
         } else if (
