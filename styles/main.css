@@ -21,6 +21,12 @@ p {
   font-weight: bold;
 }
 
+a {
+  font-size: 1.5rem;
+  padding: 20px;
+  font-weight: bold;
+}
+
 li {
   font-size: 1.5rem;
   padding: 20px;
