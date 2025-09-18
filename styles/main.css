@@ -27,6 +27,16 @@ a {
   font-weight: bold;
 }
 
+th {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+td {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 li {
   font-size: 1.5rem;
   padding: 20px;
@@ -37,6 +47,15 @@ li {
 .img {
   width: auto;
   max-width: 100%;
+}
+
+table th,
+td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
 }
 
 body {
@@ -144,6 +163,11 @@ main {
 #sitting-statue-header {
   background-image: url(../assets/sitting-statues-background.png);
   background-position: 50% 16%;
+}
+
+#wharenui-header {
+  background-image: url(../assets/wharenui.png);
+  background-position: 50% 35%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */

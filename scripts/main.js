@@ -11,6 +11,7 @@ let navList = [
   { name: 'Emotional Intelligence', link: 'emotional-intelligence.html' },
   { name: 'Neuroplasticity', link: 'neuroplasticity.html' },
   { name: 'The Growth Mindset', link: 'growth-mindset.html' },
+  { name: 'Te Whare Tapa Whā', link: 'te-whare-tapa-wha.html' },
 ]
 
 checkIfIsIndex() // if page is index.html, isIndex = true
