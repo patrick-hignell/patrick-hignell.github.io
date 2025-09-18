@@ -10,6 +10,7 @@ let navList = [
   { name: 'Javascript & the DOM', link: 'javascript-dom.html' },
   { name: 'Emotional Intelligence', link: 'emotional-intelligence.html' },
   { name: 'Neuroplasticity', link: 'neuroplasticity.html' },
+  { name: 'The Growth Mindset', link: 'growth-mindset.html' },
 ]
 
 checkIfIsIndex() // if page is index.html, isIndex = true

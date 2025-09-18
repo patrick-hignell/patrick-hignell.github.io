@@ -141,6 +141,11 @@ main {
   background-position: 50% 85%;
 }
 
+#sitting-statue-header {
+  background-image: url(../assets/sitting-statues-background.png);
+  background-position: 50% 16%;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 /*@media (max-height: 450px) {
   .sidenav {
