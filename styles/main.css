@@ -170,6 +170,11 @@ main {
   background-position: 50% 35%;
 }
 
+#bee-header {
+  background-image: url(../assets/bee-city-background.png);
+  background-position: 50% 40%;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 /*@media (max-height: 450px) {
   .sidenav {
