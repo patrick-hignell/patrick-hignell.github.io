@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Problem Solving</title>
+    <link rel="icon" type="image/x-icon" href="/assets/hat-icon-4.ico" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/javascript-dom.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header></header>
+    <div class="container">
+      <aside class="sidenav"></aside>
+      <main>
+        <h1>Problem Solving</h1>
+        <p>
+          During the JavaScript kata, there was one problem that I became stuck
+          on much longer than the rest. The challenge "deBee" had us having to
+          take a string such as "Help! buzz I'm buzz buzz surrounded buzz by
+          buzz buzz bees!!", removing all of the "buzz" words and returning a
+          string such as "Help! I'm surrounded by bees!!".
+        </p>
+        <p>
+          For quite a while I had forgotten about the array.filter method and
+          missed that the handbook had suggested using it! This sent me down the
+          completely wrong path when I initially tried to solve the problem.
+        </p>
+        <div class="center example-container">
+          <p class="monospace highlight">// make array of words.</p>
+          <p class="monospace highlight">
+            // check if array elements are queal to buzz &#40;compare in lower
+            case but preserve original capitalisation&#41;
+          </p>
+          <p class="monospace highlight">// remove buzz</p>
+          <p class="monospace highlight">// join string and return</p>
+        </div>
+        <p>
+          First I split the original string in to an array that I declared,
+          using a space as the delimiter. I then wanted to make a copy of this
+          array, however this is where I made my first mistake.
+        </p>
+        <div class="center example-container">
+          <p class="monospace highlight">
+            let stringArray = sentence.split&#40;' '&#41;
+          </p>
+          <p class="monospace highlight">let newStringArray = stringArray</p>
+        </div>
+        <p>
+          In case you missed it (I did!), by declaring a new array which is
+          equal to a different array, you create what is called a "shallow
+          copy". Any objects or arrays within a shallow copy are just references
+          (like shortcuts) to the objects or arrays within the original array.
+          To declare a deep array you can declare it like this-
+        </p>
+        <div class="center example-container">
+          <p class="monospace highlight">
+            let newStringArray = [...stringArray]
+          </p>
+        </div>
+        <p>My function ended up looking something like this-</p>
+        <div class="center example-container">
+          <p class="monospace highlight">
+            function deBee&#40;sentence&#41; &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            let stringArray = sentence.split&#40;' '&#41;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            let newStringArray = stringArray
+          </p>
+          <p class="monospace highlight text-indent-1">
+            stringArray.forEach&#40;function &#40;element, index&#41; &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-2">
+            console.log&#40;element.toLowerCase&#40;&#41;&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">
+            if &#40;element.toLowerCase&#40;&#41; === 'buzz'&#41; &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-3">
+            console.log&#40;'is buzz at ' + index&#41;
+          </p>
+          <p class="monospace highlight text-indent-3">
+            console.log&#40;newStringArray.splice&#40;index, 1&#41;&#41;
+          </p>
+          <p class="monospace highlight text-indent-2">&rbrace;</p>
+          <p class="monospace highlight text-indent-1">&rbrace;&#41;</p>
+          <p class="monospace highlight text-indent-1">
+            console.log&#40;newStringArray&#41;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            console.log&#40;stringArray&#41;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            return newStringArray.join&#40;' '&#41;
+          </p>
+          <p class="monospace highlight">&rbrace;</p>
+        </div>
+        <p>
+          It wasn’t working, hence I was using console.log to track each of the
+          changes. I also googled copying assays which alerted me to the fact
+          that a shallow copy of an array could cause problems. It was by
+          console logging that I realised there was a different outcome
+          depending on whether I was making a shallow or deep copy. It still was
+          not however producing the right result. I could see due to the console
+          logs that the for each statement was removing components whilst it was
+          trying to alter subsequent components and so I realised that this
+          approach was not going to work. I sat and thought through the problem
+          from the beginning and tried to construct a question in my mind which
+          might help me google the right answer. During this process I recalled
+          that I had previously seen filter as a method and thought that this
+          would be a good line of enquiry. I suppose trying to describe the
+          problem in my mind for google could be seen as similar to the rubber
+          ducky method. This line of enquiry eventually led me to my final
+          submission-
+        </p>
+        <div class="center example-container">
+          <p class="monospace highlight">
+            function deBee&#40;sentence&#41; &lbrace;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            let stringArray = sentence.split&#40;' '&#41;
+          </p>
+          <p class="monospace highlight text-indent-1">
+            let newStringArray = stringArray.filter&#40;
+          </p>
+          <p class="monospace highlight text-indent-2">
+            &#40;string&#41; =&gt; string.toLowerCase&#40;&#41; !== 'buzz'
+          </p>
+          <p class="monospace highlight text-indent-1">&#41;</p>
+          <p class="monospace highlight text-indent-1">
+            return newStringArray.join&#40;' '&#41;
+          </p>
+          <p class="monospace highlight">&rbrace;</p>
+        </div>
+        <p>
+          It worked and even more satisfyingly it was more concise and elegant
+          than my original effort!
+        </p>
+      </main>
+    </div>
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
