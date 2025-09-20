@@ -69,12 +69,12 @@
   font-family: monospace;
 }
 
-.punctuation {
+.operator {
   color: white;
   font-family: monospace;
 }
 
-.statement {
+.conditional {
   color: #b670d6;
   font-family: monospace;
 }

@@ -216,16 +216,23 @@
           move on to the next exercise.
         </p>
         <div class="center example-container">
-          <p class="monospace highlight">let psychicLinkDuration = 20</p>
-          <p class="monospace highlight">
-            for &#40;let i = 0; i &lt; psychicLinkDuration; i++&#41; &lbrace;
-          </p>
-          <p class="monospace highlight text-indent-1">
-            console.log&#40;'Hold the door!'&#41;
-          </p>
-          <p class="monospace highlight">
-            &rbrace; // will log 'Hold the door!' x 20
-          </p>
+          <p class="monospace highlight">let sentenceStart = 'Ho'</p>
+<p class="monospace highlight">let sentenceMid = 'ld the '</p>
+<p class="monospace highlight">let sentenceEnd = 'door!'</p>
+<p class="monospace highlight">for &#40;let i = 0; i &lt;= sentenceMid.length; i++&#41; &lbrace;</p>
+<p class="monospace highlight text-indent-1">let newSentenceMid = sentenceMid.substring&#40;0, sentenceMid.length - i&#41;</p>
+<p class="monospace highlight text-indent-1">console.log&#40;sentenceStart + newSentenceMid + sentenceEnd&#41;</p>
+<p class="monospace highlight">&rbrace;</p>
+<p class="monospace highlight">// will log</p>
+<p class="monospace highlight">//'Hold the door!'</p>
+<p class="monospace highlight">//'Hold thedoor!'</p>
+<p class="monospace highlight">//'Hold thdoor!'</p>
+<p class="monospace highlight">//'Hold tdoor!'</p>
+<p class="monospace highlight">//'Hold door!'</p>
+<p class="monospace highlight">//'Holddoor!'</p>
+<p class="monospace highlight">//'Holdoor!'</p>
+<p class="monospace highlight">//'Hodoor!'</p>
+
         </div>
         <p class="center">
           Functions- functions are a section of code which can be repeated as

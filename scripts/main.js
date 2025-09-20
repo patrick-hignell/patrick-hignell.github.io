@@ -73,155 +73,148 @@ const standardFunctionArray = [
   'toLowerCase',
   'join',
   'forEach',
-]
+] // list of built in functions and methods <-- ADD ANY MISSING BUILT IN FUNCTIONS AND METHODS TO THE ARRAY
 
-const customFunctionArray = ['checkSpell', 'deBee', 'splice']
+const customFunctionArray = ['checkSpell', 'deBee', 'splice'] // <-- ADD YOUR CUSTOM FUNCTIONS AND METHODS TO THE ARRAY
 
 functionArray = standardFunctionArray.concat(customFunctionArray)
 
 const elementArray = document.getElementsByClassName('highlight')
 
-let bracketCount = 1
+let bracketCount = 0
 let isComment = false
 let commentMarker = ''
+let isQuotation = false
+let quotationMarker = ''
+let quotationText = ''
+let commentText = ''
+let textArray = []
+
 for (let i = 0; i < elementArray.length; i++) {
-  let isQuotation = false
+  resetValues()
+  textArray = formatArray(elementArray[i].innerHTML.trim(), elementArray[i])
+  elementArray[i].innerHTML = '' // remove current text from elementArray
+  for (let j = 0; j < textArray.length; j++) {
+    let currentElement = elementArray[i]
+    let currentString = textArray[j]
+    let previousString = textArray[j - 1] || ''
+    let nextString = textArray[j + 1] || ''
+
+    if (isComment) {
+      if (
+        ifCommentEnd(previousString + currentString) ||
+        j == textArray.length - 1
+      ) {
+        isComment = false
+        commentText += currentString
+        addNewSpan(currentElement, 'comment', commentText)
+      } else {
+        commentText += currentString
+      }
+      continue //move to next j
+    }
+
+    if (isQuotation) {
+      if (
+        (ifQuotation(currentString) && quotationMarker === currentString) ||
+        j == textArray.length - 1
+      ) {
+        isQuotation = false
+        quotationText += currentString
+        addNewSpan(currentElement, 'string', quotationText)
+      } else {
+        quotationText += currentString
+      }
+      continue
+    }
+
+    if (ifCommentStart(currentString + nextString)) {
+      isComment = true
+      commentMarker = currentString + nextString
+      commentText = currentString
+      continue
+    }
+
+    if (ifQuotation(currentString)) {
+      isQuotation = true
+      quotationText = currentString
+      quotationMarker = currentString
+      continue
+    }
+
+    if (ifNumeric(currentString)) {
+      addNewSpan(currentElement, 'number', currentString)
+      continue
+    }
+
+    if (ifOperator(currentString)) {
+      addNewSpan(currentElement, 'operator', currentString)
+      continue
+    }
+
+    if (ifOpenBracket(currentString)) {
+      bracketCount++
+      if (bracketCount > 3) {
+        bracketCount = 1
+      }
+      addNewSpan(
+        elementArray[i],
+        'bracket-' + bracketCount.toString(),
+        currentString
+      )
+      continue
+    }
+
+    if (ifClosedBracket(currentString)) {
+      addNewSpan(
+        elementArray[i],
+        'bracket-' + bracketCount.toString(),
+        currentString
+      )
+      bracketCount--
+      if (bracketCount < 1) {
+        bracketCount = 3
+      }
+      continue
+    }
+
+    if (ifKeyword(currentString)) {
+      addNewSpan(currentElement, 'keyword', currentString)
+      continue
+    }
+
+    if (ifConditional(currentString)) {
+      addNewSpan(currentElement, 'conditional', currentString)
+      continue
+    }
+
+    if (ifFunction(currentString)) {
+      addNewSpan(currentElement, 'function', currentString)
+      continue
+    }
+
+    addNewSpan(currentElement, 'variable', currentString) // default
+  }
+}
+
+function resetValues() {
+  isQuotation = false
   if (commentMarker !== '/*') {
     isComment = false
     commentMarker = ''
   }
-  let quotationMarker = ''
-  let quotationText = ''
-  let commentText = ''
-  let rawText = elementArray[i].innerHTML.trim()
-  rawText = replaceLtGt(rawText)
-  rawText = RemoveNonSpaceWhitespace(rawText)
-  rawText = AddIndent(elementArray[i], rawText)
-  let textArray = rawText.split(/([ ,;:.+-/*<>\[\]\(\)\"\'\{\}])/)
-  textArray = RemoveNaNFromArray(textArray)
-  elementArray[i].innerHTML = ''
-  //console.log(textArray)
-  for (let j = 0; j < textArray.length; j++) {
-    if (isComment == false) {
-      if (isQuotation == false) {
-        if (textArray[j].includes('/')) {
-          if (textArray[j + 1].includes('/')) {
-            //console.log('//')
-            isComment = true
-            commentMarker = '//'
-            commentText = textArray[j]
-          } else if (textArray[j + 1].includes('*')) {
-            isComment = true
-            commentMarker = '/*'
-            commentText = textArray[j]
-          } else {
-            addNewSpan(elementArray[i], 'punctuation', textArray[j])
-          }
-        } else if (textArray[j].includes('*')) {
-        } else if (textArray[j].includes('"') || textArray[j].includes("'")) {
-          isQuotation = true
-          quotationText = textArray[j]
-          quotationMarker = textArray[j]
-        } else if (isNumeric(textArray[j]) == true) {
-          addNewSpan(elementArray[i], 'number', textArray[j])
-        } else if (
-          textArray[j].includes('.') ||
-          textArray[j].includes(',') ||
-          textArray[j].includes('=') ||
-          textArray[j].includes(':') ||
-          textArray[j].includes(';') ||
-          textArray[j].includes('+') ||
-          textArray[j].includes('-') ||
-          textArray[j].includes('*') ||
-          textArray[j].includes('<') ||
-          textArray[j].includes('>')
-        ) {
-          addNewSpan(elementArray[i], 'punctuation', textArray[j])
-        } else if (
-          textArray[j].includes('{') ||
-          textArray[j].includes('[') ||
-          textArray[j].includes('(')
-        ) {
-          if (bracketCount > 3) {
-            bracketCount = 1
-          }
-          addNewSpan(
-            elementArray[i],
-            'bracket-' + bracketCount.toString(),
-            textArray[j]
-          )
-          bracketCount++
-        } else if (
-          textArray[j].includes('}') ||
-          textArray[j].includes(']') ||
-          textArray[j].includes(')')
-        ) {
-          bracketCount--
-          if (bracketCount < 1) {
-            bracketCount = 3
-          }
-          addNewSpan(
-            elementArray[i],
-            'bracket-' + bracketCount.toString(),
-            textArray[j]
-          )
-        } else if (
-          textArray[j] == 'let' ||
-          textArray[j] == 'const' ||
-          textArray[j] == 'true' ||
-          textArray[j] == 'false' ||
-          textArray[j] == 'function'
-        ) {
-          addNewSpan(elementArray[i], 'keyword', textArray[j])
-        } else if (
-          textArray[j] == 'if' ||
-          textArray[j] == 'else' ||
-          textArray[j] == 'for' ||
-          textArray[j] == 'switch' ||
-          textArray[j] == 'case' ||
-          textArray[j] == 'default' ||
-          textArray[j] == 'break'
-        ) {
-          addNewSpan(elementArray[i], 'statement', textArray[j])
-        } else if (functionArray.includes(textArray[j])) {
-          addNewSpan(elementArray[i], 'function', textArray[j])
-        } else {
-          addNewSpan(elementArray[i], 'variable', textArray[j])
-        }
-      } else {
-        if (textArray[j].includes('"') || textArray[j].includes("'")) {
-          if (quotationMarker === textArray[j]) {
-            isQuotation = false
-            quotationText += textArray[j]
-            addNewSpan(elementArray[i], 'string', quotationText)
-          } else {
-            quotationText += textArray[j]
-          }
-        } else {
-          quotationText += textArray[j]
-        }
-      }
-    } else {
-      if (
-        j > 0 &&
-        textArray[j].includes('/') &&
-        textArray[j - 1].includes('*')
-      ) {
-        isComment = false
-        commentText += textArray[j]
-        addNewSpan(elementArray[i], 'comment', commentText)
-      } else {
-        commentText += textArray[j]
-      }
-    }
-    if (j == textArray.length - 1) {
-      if (isComment == true) {
-        addNewSpan(elementArray[i], 'comment', commentText)
-      } else if (isQuotation == true) {
-        addNewSpan(elementArray[i], 'string', quotationText)
-      }
-    }
-  }
+  quotationMarker = ''
+  quotationText = ''
+  commentText = ''
+}
+
+function formatArray(fstring, element) {
+  fstring = replaceLtGt(fstring)
+  fstring = standardiseSpaceWhitespace(fstring)
+  fstring = addIndent(element, fstring)
+  let farray = fstring.split(/([ ,;:.+-/*<>\[\]\(\)\"\'\{\}])/)
+  farray = removeEmptiesFromArray(farray)
+  return farray
 }
 
 function addNewSpan(fParent, fClass, fText) {
@@ -233,13 +226,13 @@ function addNewSpan(fParent, fClass, fText) {
   fChild.innerHTML = fText
 }
 
-function isNumeric(str) {
-  if (typeof str != 'string') return false // we only process strings!
-  return (
-    !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-    !isNaN(parseFloat(str))
-  ) // ...and ensure strings of whitespace fail
-}
+//function isNumeric(str) {
+//  if (typeof str != 'string') return false // we only process strings!
+//  return (
+//    !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+//    !isNaN(parseFloat(str))
+//  ) // ...and ensure strings of whitespace fail
+//}
 
 function replaceLtGt(fText) {
   fText = fText.replaceAll('&gt;', '<')
@@ -255,14 +248,13 @@ function replaceLtGt(fText) {
 //  }
 //}
 
-function RemoveNonSpaceWhitespace(fText) {
+function standardiseSpaceWhitespace(fText) {
   fText = fText.replaceAll(/\n\s+/g, ' ')
   return fText
 }
 
-function RemoveNaNFromArray(fArray) {
+function removeEmptiesFromArray(fArray) {
   fArray = fArray.filter((element) => element !== '')
-  //console.log(fArray)
   return fArray
 }
 
@@ -274,9 +266,8 @@ function RemoveNaNFromArray(fArray) {
 //  return str.slice(0, index) + str.slice(index + 1)
 //}
 
-function AddIndent(fElement, fText) {
+function addIndent(fElement, fText) {
   let fIndentNumber = 0
-  let fClassNameString = ''
   let fNewText = ''
   let fClassNameArray = Array.from(fElement.classList)
   for (const className of fClassNameArray) {
@@ -291,4 +282,127 @@ function AddIndent(fElement, fText) {
   }
 
   return fText
+}
+
+// inner loop functions
+
+function ifCommentEnd(str) {
+  return str === '*/'
+}
+
+function ifCommentStart(str) {
+  return str === '/*' || str === '//'
+}
+
+function continueComment(i, j) {
+  if (j > 0 && textArray[j].includes('/') && textArray[j - 1].includes('*')) {
+    isComment = false
+    commentText += textArray[j]
+    addNewSpan(elementArray[i], 'comment', commentText)
+  } else {
+    commentText += textArray[j]
+
+    if (j == textArray.length - 1) {
+      addNewSpan(elementArray[i], 'comment', commentText)
+    }
+  }
+}
+
+function continueQuotation(i, j) {
+  if (textArray[j].includes('"') || textArray[j].includes("'")) {
+    if (quotationMarker === textArray[j]) {
+      isQuotation = false
+      quotationText += textArray[j]
+      addNewSpan(elementArray[i], 'string', quotationText)
+    } else {
+      quotationText += textArray[j]
+      if (j == textArray.length - 1) {
+        addNewSpan(elementArray[i], 'string', quotationText)
+      }
+    }
+  } else {
+    quotationText += textArray[j]
+    if (j == textArray.length - 1) {
+      addNewSpan(elementArray[i], 'string', quotationText)
+    }
+  }
+}
+
+function ifComment(str, nextStr) {
+  if (str.includes('/')) {
+    if (nextStr.includes('/')) {
+      isComment = true
+      commentMarker = '//'
+      commentText = str
+      return true
+    } else if (nextStr.includes('*')) {
+      isComment = true
+      commentMarker = '/*'
+      commentText = str
+      return true
+    }
+    return false
+  }
+  return false
+}
+
+function ifQuotation(str) {
+  return str.includes('"') || str.includes("'")
+}
+
+function ifNumeric(str) {
+  return (
+    !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+  )
+}
+
+function ifOperator(str) {
+  return (
+    str.includes('.') ||
+    str.includes(',') ||
+    str.includes('=') ||
+    str.includes(':') ||
+    str.includes(';') ||
+    str.includes('+') ||
+    str.includes('-') ||
+    str.includes('*') ||
+    str.includes('/') ||
+    str.includes('<') ||
+    str.includes('>')
+  )
+}
+
+function ifOpenBracket(str) {
+  return str.includes('{') || str.includes('[') || str.includes('(')
+}
+
+function ifClosedBracket(str) {
+  return str.includes('}') || str.includes(']') || str.includes(')')
+}
+
+function ifKeyword(str) {
+  return (
+    str == 'let' ||
+    str == 'const' ||
+    str == 'true' ||
+    str == 'false' ||
+    str == 'function'
+  )
+}
+
+function ifConditional(str) {
+  return (
+    str == 'if' ||
+    str == 'else' ||
+    str == 'for' ||
+    str == 'switch' ||
+    str == 'case' ||
+    str == 'default' ||
+    str == 'break'
+  )
+}
+
+function ifFunction(str) {
+  return functionArray.includes(str)
 }
