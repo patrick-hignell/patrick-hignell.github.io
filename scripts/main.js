@@ -13,6 +13,7 @@ let navList = [
   { name: 'The Growth Mindset', link: 'growth-mindset.html' },
   { name: 'Te Whare Tapa Whā', link: 'te-whare-tapa-wha.html' },
   { name: 'Problem Solving', link: 'problem-solving.html' },
+  { name: 'Human Skills', link: 'foundations-reflection.html' },
 ]
 
 checkIfIsIndex() // if page is index.html, isIndex = true
@@ -101,10 +102,7 @@ for (let i = 0; i < elementArray.length; i++) {
     let nextString = textArray[j + 1] || ''
 
     if (isComment) {
-      if (
-        ifCommentEnd(previousString + currentString) ||
-        j == textArray.length - 1
-      ) {
+      if (ifCommentEnd(previousString + currentString) || j == textArray.length - 1) {
         isComment = false
         commentText += currentString
         addNewSpan(currentElement, 'comment', commentText)
@@ -157,20 +155,12 @@ for (let i = 0; i < elementArray.length; i++) {
       if (bracketCount > 3) {
         bracketCount = 1
       }
-      addNewSpan(
-        elementArray[i],
-        'bracket-' + bracketCount.toString(),
-        currentString
-      )
+      addNewSpan(elementArray[i], 'bracket-' + bracketCount.toString(), currentString)
       continue
     }
 
     if (ifClosedBracket(currentString)) {
-      addNewSpan(
-        elementArray[i],
-        'bracket-' + bracketCount.toString(),
-        currentString
-      )
+      addNewSpan(elementArray[i], 'bracket-' + bracketCount.toString(), currentString)
       bracketCount--
       if (bracketCount < 1) {
         bracketCount = 3
@@ -382,13 +372,7 @@ function ifClosedBracket(str) {
 }
 
 function ifKeyword(str) {
-  return (
-    str == 'let' ||
-    str == 'const' ||
-    str == 'true' ||
-    str == 'false' ||
-    str == 'function'
-  )
+  return str == 'let' || str == 'const' || str == 'true' || str == 'false' || str == 'function'
 }
 
 function ifConditional(str) {
