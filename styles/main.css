@@ -131,7 +131,7 @@ main {
   padding: 40px 0px 60px;
   width: 90%;
   margin: -70px auto;
-  min-width: 660px;
+  min-width: 750px;
 }
 
 .scroll-container {
@@ -141,7 +141,7 @@ main {
   background-size: 100% 100%;
   z-index: -1;
   position: relative;
-  min-width: 660px;
+  min-width: 750px;
 }
 
 .scroll-inner-container {
