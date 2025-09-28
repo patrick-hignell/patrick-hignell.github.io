@@ -16,11 +16,41 @@ let navList = [
   { name: 'Human Skills', link: 'foundations-reflection.html' },
 ]
 
+if (document.getElementsByTagName('title')[0].innerHTML === 'Learning Plan') {
+  let bootcampArray = [
+    document.getElementById('bootcampScrollHandle'),
+    document.getElementById('bootcampBottomHandle'),
+  ]
+
+  bootcampArray.forEach((element) => {
+    element.onclick = scrollInteractBootcamp
+  })
+
+  let foundationsArray = [
+    document.getElementById('foundationsScrollHandle'),
+    document.getElementById('foundationsBottomHandle'),
+  ]
+
+  foundationsArray.forEach((element) => {
+    element.onclick = scrollInteractFoundations
+  })
+}
+
 checkIfIsIndex() // if page is index.html, isIndex = true
 editNavList() // makes changes to links in navList depending if index or blog
 populateSidenav() // adds navList links to sideNav
 
 // ------- Functions ------- //
+
+function scrollInteractBootcamp() {
+  let container = document.getElementById('bootcampScrollContainer')
+  container.classList.toggle('hide')
+}
+
+function scrollInteractFoundations() {
+  let container = document.getElementById('foundationsScrollContainer')
+  container.classList.toggle('hide')
+}
 
 function checkIfIsIndex() {
   if (currentPage === "Patrick's Coding Adventure") {

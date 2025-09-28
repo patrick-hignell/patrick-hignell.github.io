@@ -6,7 +6,7 @@
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   padding: 10px;
 }
 
@@ -125,6 +125,38 @@ main {
   text-decoration: underline;
 }
 
+.scroll-handle {
+  background-image: url(../assets/scroll-handle.png);
+  background-size: 100% 100%;
+  padding: 40px 0px 60px;
+  width: 90%;
+  margin: -70px auto;
+  min-width: 660px;
+}
+
+.scroll-container {
+  background-image: url(../assets/scroll-div-background-4.png);
+  width: 90%;
+  margin: -70px auto;
+  background-size: 100% 100%;
+  z-index: -1;
+  position: relative;
+  min-width: 660px;
+}
+
+.scroll-inner-container {
+  width: 70%;
+  margin: 20px auto;
+}
+
+.hide {
+  display: none;
+}
+
+.invisible-font {
+  color: rgba(0, 0, 0, 0);
+}
+
 #forest-road-header {
   background-image: url(../assets/forest-road-background.png);
   background-position: 50% 65%;
@@ -189,6 +221,7 @@ main {
     font-size: 18px;
   }
 }*/
+
 @media (max-width: 1200px), (max-height: 500px) {
   .container {
     display: block;
