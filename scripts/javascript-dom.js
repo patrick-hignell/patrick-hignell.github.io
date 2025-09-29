@@ -251,7 +251,7 @@ let amIAConjurerOfCheapTricks = false
 if (amIAConjurerOfCheapTricks == false) {
   console.log('I am not trying to rob you, I am trying to help you')
 } else {
-  Console.log('I am not trying to help you, I am trying to rob you')
+  console.log('I am not trying to help you, I am trying to rob you')
 } // will log "I am not trying to rob you, I am trying to help you"
 
 let stubbornness = 5

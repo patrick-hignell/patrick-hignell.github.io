@@ -14,6 +14,7 @@ let navList = [
   { name: 'Te Whare Tapa Whā', link: 'te-whare-tapa-wha.html' },
   { name: 'Problem Solving', link: 'problem-solving.html' },
   { name: 'Human Skills', link: 'foundations-reflection.html' },
+  { name: 'Personal Project', link: 'personal-project.html' },
 ]
 
 if (document.getElementsByTagName('title')[0].innerHTML === 'Learning Plan') {

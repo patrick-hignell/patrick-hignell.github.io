@@ -1,0 +1,223 @@
+* {
+  /*outline: 1px solid purple;*/
+  font-family: 'Eagle lake', georgia;
+  text-align: center;
+  color: #363636;
+}
+
+h1 {
+  font-size: 2.5rem;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 2rem;
+  padding: 10px;
+}
+
+p {
+  font-size: 1.5rem;
+  padding: 20px;
+  font-weight: bold;
+}
+
+body {
+  background-color: #edd7c4;
+  background-image: url(../assets/parchment-background-2.png);
+  background-size: cover;
+}
+
+header {
+  background-image: url(../assets/village-background-2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 40%;
+  min-height: 200px;
+}
+
+textarea {
+  width: 600px;
+  text-align: left;
+  font-family: monospace;
+  font-size: 1.25rem;
+}
+
+.center {
+  margin: auto;
+  width: 90%;
+}
+
+main {
+  /*min-height: 10000px;*/
+  flex: 1;
+}
+
+.container {
+  display: flex; /* Or display: grid; with appropriate grid-template-columns */
+}
+
+/* The sidebar menu */
+.sidenav {
+  width: 250px; /* Example width */
+  height: 95vh;
+  /*background-color: #f6f5e0;*/
+  background-image: url(../assets/scroll-background.png);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
+  position: sticky;
+  top: 0px;
+  /*bottom: 0px; /* Matches the header's height */
+  align-self: flex-start; /* Important for sticky in flex/grid containers */
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav::-webkit-scrollbar {
+  display: none;
+}
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #454545;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+/*
+.hide {
+  display: none;
+}
+
+.invisible-font {
+  color: rgba(0, 0, 0, 0);
+}
+
+*/
+
+#volcano-header {
+  background-image: url(../assets/mount-doom-background.png);
+  background-position: 50% 24%;
+}
+
+#form-example-container {
+  display: inline-flex;
+}
+
+@media (max-width: 1200px), (max-height: 500px) {
+  .container {
+    display: block;
+  }
+  .sidenav {
+    height: auto;
+    width: auto;
+    padding: 20px 0px;
+    flex-direction: row;
+    white-space: nowrap;
+    background-image: url(../assets/scroll-background-horizontal.png);
+    background-position: bottom;
+  }
+
+  :root {
+    font-size: 0.8em;
+  }
+}
+
+/* Highlighter */
+
+.example-container {
+  background-color: black;
+  width: 600px;
+  outline: 1px solid white;
+  padding: 20px;
+}
+
+.exampleText {
+  color: white;
+  font-family: monospace;
+  font-size: 1.25rem;
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+.monospace-black {
+  color: black;
+  font-family: monospace;
+  font-size: 1.5rem;
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.number {
+  color: #b5cea8;
+  font-family: monospace;
+}
+
+.string {
+  color: #ce915e;
+  font-family: monospace;
+}
+
+.keyword {
+  color: #3a8cd6;
+  font-family: monospace;
+}
+
+.function {
+  color: #dcdcaa;
+  font-family: monospace;
+}
+
+.bracket-1 {
+  color: #ffd700;
+  font-family: monospace;
+}
+
+.bracket-2 {
+  color: #b670d6;
+  font-family: monospace;
+}
+
+.bracket-3 {
+  color: #1e6af1;
+  font-family: monospace;
+}
+
+.variable {
+  color: #9cdcf0;
+  font-family: monospace;
+  white-space: pre;
+}
+
+.default {
+  color: #9cdcf0;
+  font-family: monospace;
+}
+
+.operator {
+  color: white;
+  font-family: monospace;
+}
+
+.conditional {
+  color: #b670d6;
+  font-family: monospace;
+}
+
+.comment {
+  color: #549955;
+  font-family: monospace;
+}
