@@ -17,38 +17,17 @@ let navList = [
   { name: 'Personal Project', link: 'personal-project.html' },
 ]
 
-checkIfIsIndex() // if page is index.html, isIndex = true
 editNavList() // makes changes to links in navList depending if index or blog
 populateSidenav() // adds navList links to sideNav
 
 // ------- Functions ------- //
 
-function scrollInteractBootcamp() {
-  let container = document.getElementById('bootcampScrollContainer')
-  container.classList.toggle('hide')
-}
-
-function scrollInteractFoundations() {
-  let container = document.getElementById('foundationsScrollContainer')
-  container.classList.toggle('hide')
-}
-
-function checkIfIsIndex() {
-  if (currentPage === "Patrick's Coding Adventure") {
-    isIndex = true
-  }
-}
-
 function editNavList() {
-  if (isIndex === true) {
-    navList.forEach(function (element, index) {
-      if (index !== 0) {
-        element.link = 'blog/' + element.link
-      }
-    })
-  } else {
-    navList[0].link = '../index.html'
-  }
+  navList.forEach(function (element, index) {
+    if (index !== 0) {
+      element.link = 'blog/' + element.link
+    }
+  })
 }
 
 function populateSidenav() {
@@ -78,35 +57,277 @@ const standardFunctionArray = [
   'forEach',
 ] // list of built in functions and methods <-- ADD ANY MISSING BUILT IN FUNCTIONS AND METHODS TO THE ARRAY
 
-const customFunctionArray = [] // <-- ADD YOUR CUSTOM FUNCTIONS AND METHODS TO THE ARRAY
+let customFunctionArray = [] // <-- ADD YOUR CUSTOM FUNCTIONS AND METHODS TO THE ARRAY
 
-functionArray = standardFunctionArray.concat(customFunctionArray)
+let functionArray = standardFunctionArray.concat(customFunctionArray)
+
+let bracketCount = 0
+let isComment = false
+let commentMarker = ''
+let isQuotation = false
+let quotationMarker = ''
+let quotationText = ''
+let commentText = ''
+let pText = ''
 
 formText = document.getElementById('formText')
+customFunctionInput = document.getElementById('customFunctionInput')
 exampleContainer = document.getElementById('exampleContainer')
+htmlContainer = document.getElementById('htmlContainer')
 formText.addEventListener('input', (event) => {
   highlight(event.target.value)
 })
 
+customFunctionInput.addEventListener('input', (event) => {
+  changeCustomFunctionArray(event.target.value)
+})
+
+function changeCustomFunctionArray(text) {
+  customFunctionArray = text.split(',')
+  customFunctionArray.forEach((string, index) => {
+    customFunctionArray[index] = string.trim()
+  })
+  functionArray = standardFunctionArray.concat(customFunctionArray)
+  highlight(formText.value)
+}
+
 function highlight(text) {
   exampleContainer.innerHTML = ''
-  let textArray = text.split('\n')
-  for (let i = 0; i < textArray.length; i++) {
-    let openingTag = "<p class='exampleText'>"
-    if (countLeadingSpaces(textArray[i]) > 0) {
-      openingTag =
-        "<p class='exampleText' style='margin-left: " +
-        countLeadingSpaces(textArray[i]) * 10 +
-        "px;'>"
+  htmlContainer.innerHTML = ''
+  if (text !== '') {
+    let textArray = text.split('\n')
+    for (let i = 0; i < textArray.length; i++) {
+      resetValues()
+      let openingTag = "<p class='exampleText'>"
+      if (countLeadingSpaces(textArray[i]) > 0) {
+        openingTag =
+          "<p class='exampleText' style='margin-left: " +
+          countLeadingSpaces(textArray[i]) * 10 +
+          "px;'>"
+      }
+      let pArray = formatArray(textArray[i].trim())
+      for (let j = 0; j < pArray.length; j++) {
+        let currentString = pArray[j]
+        let previousString = pArray[j - 1] || ''
+        let nextString = pArray[j + 1] || ''
+
+        if (isComment) {
+          if (ifCommentEnd(previousString + currentString) || j == pArray.length - 1) {
+            isComment = false
+            commentText += currentString
+            addNewSpan('comment', commentText)
+          } else {
+            commentText += currentString
+          }
+          continue //move to next j
+        }
+
+        if (isQuotation) {
+          if (
+            (ifQuotation(currentString) && quotationMarker === currentString) ||
+            j == pArray.length - 1
+          ) {
+            isQuotation = false
+            quotationText += currentString
+            addNewSpan('string', quotationText)
+          } else {
+            quotationText += currentString
+          }
+          continue
+        }
+
+        if (ifCommentStart(currentString + nextString)) {
+          isComment = true
+          commentMarker = currentString + nextString
+          commentText = currentString
+          continue
+        }
+
+        if (ifQuotation(currentString)) {
+          isQuotation = true
+          quotationText = currentString
+          quotationMarker = currentString
+          continue
+        }
+
+        if (ifNumeric(currentString)) {
+          addNewSpan('number', currentString)
+          continue
+        }
+
+        if (ifOperator(currentString)) {
+          addNewSpan('operator', currentString)
+          continue
+        }
+
+        if (ifOpenBracket(currentString)) {
+          bracketCount++
+          if (bracketCount > 3) {
+            bracketCount = 1
+          }
+          addNewSpan('bracket-' + bracketCount.toString(), currentString)
+          continue
+        }
+
+        if (ifClosedBracket(currentString)) {
+          addNewSpan('bracket-' + bracketCount.toString(), currentString)
+          bracketCount--
+          if (bracketCount < 1) {
+            bracketCount = 3
+          }
+          continue
+        }
+
+        if (ifKeyword(currentString)) {
+          addNewSpan('keyword', currentString)
+          continue
+        }
+
+        if (ifConditional(currentString)) {
+          addNewSpan('conditional', currentString)
+          continue
+        }
+
+        if (ifFunction(currentString)) {
+          addNewSpan('function', currentString)
+          continue
+        }
+
+        addNewSpan('variable', currentString) // default
+      }
+
+      let outputText = openingTag + pText + '</p>'
+      exampleContainer.innerHTML += outputText
+      outputText = formatHTMLText(outputText)
+      htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
     }
-    exampleContainer.innerHTML += openingTag + textArray[i] + '</p>'
   }
+}
+
+function formatHTMLText(text) {
+  text = text.replaceAll('<', '&lt;')
+  text = text.replaceAll('>', '&gt;')
+  return text
 }
 
 function countLeadingSpaces(str) {
   const match = str.match(/^\s*/)
   return match[0].length
 }
+
+function formatArray(fstring) {
+  //fstring = replaceLtGt(fstring)
+  //fstring = standardiseSpaceWhitespace(fstring)
+  //fstring = addIndent(element, fstring)
+  let farray = fstring.split(/([ ,;:.+-/*<>\[\]\(\)\"\'\{\}])/)
+  farray = removeEmptiesFromArray(farray)
+  return farray
+}
+
+function removeEmptiesFromArray(fArray) {
+  fArray = fArray.filter((element) => element !== '')
+  return fArray
+}
+
+function addNewSpan(spanClass, spanText) {
+  pText += "<span class='" + spanClass + "'>" + spanText + '</span>'
+}
+
+function resetValues() {
+  isQuotation = false
+  if (commentMarker !== '/*') {
+    isComment = false
+    commentMarker = ''
+  }
+  quotationMarker = ''
+  quotationText = ''
+  commentText = ''
+  pText = ''
+}
+
+//----- Loop Functions -----//
+
+function ifCommentEnd(str) {
+  return str === '*/'
+}
+
+function ifCommentStart(str) {
+  return str === '/*' || str === '//'
+}
+
+function ifComment(str, nextStr) {
+  if (str.includes('/')) {
+    if (nextStr.includes('/')) {
+      isComment = true
+      commentMarker = '//'
+      commentText = str
+      return true
+    } else if (nextStr.includes('*')) {
+      isComment = true
+      commentMarker = '/*'
+      commentText = str
+      return true
+    }
+    return false
+  }
+  return false
+}
+
+function ifQuotation(str) {
+  return str.includes('"') || str.includes("'")
+}
+
+function ifNumeric(str) {
+  return (
+    !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+  )
+}
+
+function ifOperator(str) {
+  return (
+    str.includes('.') ||
+    str.includes(',') ||
+    str.includes('=') ||
+    str.includes(':') ||
+    str.includes(';') ||
+    str.includes('+') ||
+    str.includes('-') ||
+    str.includes('*') ||
+    str.includes('/') ||
+    str.includes('<') ||
+    str.includes('>')
+  )
+}
+
+function ifOpenBracket(str) {
+  return str.includes('{') || str.includes('[') || str.includes('(')
+}
+
+function ifClosedBracket(str) {
+  return str.includes('}') || str.includes(']') || str.includes(')')
+}
+
+function ifKeyword(str) {
+  return str == 'let' || str == 'const' || str == 'true' || str == 'false' || str == 'function'
+}
+
+function ifConditional(str) {
+  return (
+    str == 'if' ||
+    str == 'else' ||
+    str == 'for' ||
+    str == 'switch' ||
+    str == 'case' ||
+    str == 'default' ||
+    str == 'break'
+  )
+}
+
+function ifFunction(str) {
+  return functionArray.includes(str)
+}
+
 //
 //
 //
