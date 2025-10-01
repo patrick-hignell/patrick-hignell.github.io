@@ -44,7 +44,7 @@ function addNewSidenavLink(fparent, ftext, flink) {
   fchild.href = flink
 }
 
-//---JavaScript Display---//
+//----- JavaScript Display -----//
 const standardFunctionArray = [
   'getElementsByClassName',
   'split',
@@ -188,8 +188,13 @@ function highlight(text) {
           continue
         }
 
-        if (ifFunction(currentString)) {
+        if (ifFunction(currentString, nextString)) {
           addNewSpan('function', currentString)
+          continue
+        }
+
+        if (ifSpace(currentString)) {
+          pText += ' '
           continue
         }
 
@@ -202,6 +207,13 @@ function highlight(text) {
       htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
     }
   }
+  ResizeTextarea()
+}
+
+function ResizeTextarea() {
+  formText.style.height = 'auto' // Reset height to auto to calculate new scrollHeight
+  formText.style.height = formText.scrollHeight + 'px' // Set height to content's scrollHeight
+  //formText.style.height = exampleContainer.style.height
 }
 
 function formatHTMLText(text) {
@@ -296,7 +308,8 @@ function ifOperator(str) {
     str.includes('*') ||
     str.includes('/') ||
     str.includes('<') ||
-    str.includes('>')
+    str.includes('>') ||
+    str.includes('|')
   )
 }
 
@@ -320,12 +333,22 @@ function ifConditional(str) {
     str == 'switch' ||
     str == 'case' ||
     str == 'default' ||
-    str == 'break'
+    str == 'break' ||
+    str == 'return' ||
+    str == 'continue'
   )
 }
 
-function ifFunction(str) {
-  return functionArray.includes(str)
+//function ifFunction(str) {
+//  return functionArray.includes(str)
+//}
+
+function ifFunction(str, nextStr) {
+  return nextStr == '('
+}
+
+function ifSpace(str) {
+  return str == ' '
 }
 
 //
