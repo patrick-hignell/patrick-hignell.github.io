@@ -246,3 +246,7 @@ main {
   color: #549955;
   font-family: monospace;
 }
+
+.hoverable:hover {
+  background-color: #ffd90073;
+}

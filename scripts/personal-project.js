@@ -45,21 +45,35 @@ function addNewSidenavLink(fparent, ftext, flink) {
 }
 
 //----- JavaScript Display -----//
-const standardFunctionArray = [
-  'getElementsByClassName',
-  'split',
-  'includes',
-  'push',
-  'log',
-  'filter',
-  'toLowerCase',
-  'join',
-  'forEach',
-] // list of built in functions and methods <-- ADD ANY MISSING BUILT IN FUNCTIONS AND METHODS TO THE ARRAY
+//const standardFunctionArray = [
+//  'getElementsByClassName',
+//  'split',
+//  'includes',
+//  'push',
+//  'log',
+//  'filter',
+//  'toLowerCase',
+//  'join',
+//  'forEach',
+//] // list of built in functions and methods <-- ADD ANY MISSING BUILT IN FUNCTIONS AND METHODS TO THE ARRAY
+//
+//let customFunctionArray = [] // <-- ADD YOUR CUSTOM FUNCTIONS AND METHODS TO THE ARRAY
+//
+//let functionArray = standardFunctionArray.concat(customFunctionArray)
 
-let customFunctionArray = [] // <-- ADD YOUR CUSTOM FUNCTIONS AND METHODS TO THE ARRAY
-
-let functionArray = standardFunctionArray.concat(customFunctionArray)
+const classArray = [
+  'number',
+  'string',
+  'keyword',
+  'function',
+  'bracket-1',
+  'bracket-2',
+  'bracket-3',
+  'variable',
+  'operator',
+  'conditional',
+  'comment',
+]
 
 let bracketCount = 0
 let isComment = false
@@ -69,27 +83,31 @@ let quotationMarker = ''
 let quotationText = ''
 let commentText = ''
 let pText = ''
+let clickSetting
 
 formText = document.getElementById('formText')
-customFunctionInput = document.getElementById('customFunctionInput')
+//customFunctionInput = document.getElementById('customFunctionInput')
 exampleContainer = document.getElementById('exampleContainer')
 htmlContainer = document.getElementById('htmlContainer')
+classButton = document.getElementById('classButton')
 formText.addEventListener('input', (event) => {
   highlight(event.target.value)
 })
+
+classButton.addEventListener('click', changeClassButtonPressed)
 
 customFunctionInput.addEventListener('input', (event) => {
   changeCustomFunctionArray(event.target.value)
 })
 
-function changeCustomFunctionArray(text) {
-  customFunctionArray = text.split(',')
-  customFunctionArray.forEach((string, index) => {
-    customFunctionArray[index] = string.trim()
-  })
-  functionArray = standardFunctionArray.concat(customFunctionArray)
-  highlight(formText.value)
-}
+//function changeCustomFunctionArray(text) {
+//  customFunctionArray = text.split(',')
+//  customFunctionArray.forEach((string, index) => {
+//    customFunctionArray[index] = string.trim()
+//  })
+//  functionArray = standardFunctionArray.concat(customFunctionArray)
+//  highlight(formText.value)
+//}
 
 function highlight(text) {
   exampleContainer.innerHTML = ''
@@ -107,6 +125,7 @@ function highlight(text) {
       }
       let pArray = formatArray(textArray[i].trim())
       for (let j = 0; j < pArray.length; j++) {
+        let index = j
         let currentString = pArray[j]
         let previousString = pArray[j - 1] || ''
         let nextString = pArray[j + 1] || ''
@@ -188,13 +207,13 @@ function highlight(text) {
           continue
         }
 
-        if (ifFunction(currentString, nextString)) {
-          addNewSpan('function', currentString)
+        if (ifSpace(currentString)) {
+          pText += ' '
           continue
         }
 
-        if (ifSpace(currentString)) {
-          pText += ' '
+        if (ifFunction(pArray, index)) {
+          addNewSpan('function', currentString)
           continue
         }
 
@@ -207,19 +226,41 @@ function highlight(text) {
       htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
     }
   }
-  ResizeTextarea()
+  resizeTextarea()
+  if (clickSetting !== undefined) {
+    console.log(clickSetting)
+    addClick(clickSetting)
+  }
 }
 
-function ResizeTextarea() {
+function resizeTextarea() {
   formText.style.height = 'auto' // Reset height to auto to calculate new scrollHeight
   formText.style.height = formText.scrollHeight + 'px' // Set height to content's scrollHeight
   //formText.style.height = exampleContainer.style.height
+}
+
+function addClick(setting) {
+  exampleContainer.childNodes.forEach((element) => {
+    let spanArray = element.querySelectorAll('span')
+    spanArray.forEach((element) => {
+      element.classList.add('hoverable')
+      element.onclick = setting
+    })
+  })
 }
 
 function formatHTMLText(text) {
   text = text.replaceAll('<', '&lt;')
   text = text.replaceAll('>', '&gt;')
   return text
+}
+
+function generateHTMLText() {
+  htmlContainer.innerHTML = ''
+  exampleContainer.childNodes.forEach((element) => {
+    let outputText = formatHTMLText(element.innerHTML)
+    htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
+  })
 }
 
 function countLeadingSpaces(str) {
@@ -242,7 +283,8 @@ function removeEmptiesFromArray(fArray) {
 }
 
 function addNewSpan(spanClass, spanText) {
-  pText += "<span class='" + spanClass + "'>" + spanText + '</span>'
+  let openingTag = "<span class='"
+  pText += openingTag + spanClass + "'>" + spanText + '</span>'
 }
 
 function resetValues() {
@@ -255,6 +297,30 @@ function resetValues() {
   quotationText = ''
   commentText = ''
   pText = ''
+}
+
+function changeClassButtonPressed() {
+  if (clickSetting === changeClassSpanPressed) {
+    clickSetting = undefined
+  } else {
+    clickSetting = changeClassSpanPressed
+  }
+  highlight(formText.value)
+}
+
+function changeClassSpanPressed() {
+  this.classList.remove('hoverable')
+  let classIndex = classArray.indexOf(this.classList[0])
+  let newClassIndex = classIndex + 1
+  if (newClassIndex >= classArray.length) {
+    newClassIndex = 0
+  }
+  this.classList.remove(classArray[classIndex])
+  this.classList.add(classArray[newClassIndex])
+  this.classList.add('hoverable')
+  generateHTMLText()
+  //this.className = ''
+  //this.classList.add(prompt('what class do you want?'))
 }
 
 //----- Loop Functions -----//
@@ -343,8 +409,16 @@ function ifConditional(str) {
 //  return functionArray.includes(str)
 //}
 
-function ifFunction(str, nextStr) {
-  return nextStr == '('
+function ifFunction(arr, ind) {
+  for (let k = ind; k < arr.length; k++) {
+    if (arr[k + 1] === '(') {
+      return true
+    } else if (arr[k + 1] !== ' ') {
+      return false
+    }
+  }
+  console.log('endOfArray')
+  return false
 }
 
 function ifSpace(str) {
