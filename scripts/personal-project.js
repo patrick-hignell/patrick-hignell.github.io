@@ -73,6 +73,10 @@ const classArray = [
   'operator',
   'conditional',
   'comment',
+  'custom-1',
+  'custom-2',
+  'custom-3',
+  'custom-4',
 ]
 
 let bracketCount = 0
@@ -84,15 +88,21 @@ let quotationText = ''
 let commentText = ''
 let pText = ''
 let clickSetting
+let hoverColor = '#ffd90070'
+const root = document.documentElement
+root.style.setProperty('--hover-color', '#ffd90000')
 
-formText = document.getElementById('formText')
+let formText = document.getElementById('formText')
 //customFunctionInput = document.getElementById('customFunctionInput')
 exampleContainer = document.getElementById('exampleContainer')
 htmlContainer = document.getElementById('htmlContainer')
 classButton = document.getElementById('classButton')
+let mouseDisplay = document.getElementById('mouseDisplay')
 formText.addEventListener('input', (event) => {
   highlight(event.target.value)
 })
+
+document.addEventListener('mousemove', mouseDisplayMove)
 
 classButton.addEventListener('click', changeClassButtonPressed)
 
@@ -108,21 +118,18 @@ customFunctionInput.addEventListener('input', (event) => {
 //  functionArray = standardFunctionArray.concat(customFunctionArray)
 //  highlight(formText.value)
 //}
-
+resizeTextarea()
 function highlight(text) {
+  removeSpanListeners()
   exampleContainer.innerHTML = ''
   htmlContainer.innerHTML = ''
+  bracketCount = 0
   if (text !== '') {
     let textArray = text.split('\n')
     for (let i = 0; i < textArray.length; i++) {
       resetValues()
-      let openingTag = "<p class='exampleText'>"
-      if (countLeadingSpaces(textArray[i]) > 0) {
-        openingTag =
-          "<p class='exampleText' style='margin-left: " +
-          countLeadingSpaces(textArray[i]) * 10 +
-          "px;'>"
-      }
+      let openingTag = setOpeningTag(textArray[i])
+      textArray[i] = formatText(textArray[i])
       let pArray = formatArray(textArray[i].trim())
       for (let j = 0; j < pArray.length; j++) {
         let index = j
@@ -222,15 +229,44 @@ function highlight(text) {
 
       let outputText = openingTag + pText + '</p>'
       exampleContainer.innerHTML += outputText
-      outputText = formatHTMLText(outputText)
+      outputText = formatText(outputText)
       htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
     }
   }
   resizeTextarea()
-  if (clickSetting !== undefined) {
-    console.log(clickSetting)
-    addClick(clickSetting)
+  addClick()
+}
+
+function removeSpanListeners() {
+  //let count = 0
+  exampleContainer.childNodes.forEach((element) => {
+    let spanArray = element.querySelectorAll('span')
+    spanArray.forEach((element) => {
+      element.removeEventListener('click', spanPressed)
+      element.removeEventListener('mouseover', spanHovered)
+      element.removeEventListener('mouseleave', resetMouseDisplay)
+      //count++
+    })
+  })
+  //console.log(`removed ${count} listeners`)
+}
+
+function mouseDisplayMove(event) {
+  const mouseX = event.pageX
+  const mouseY = event.pageY
+  // console.log(mouseX + ' ' + mouseY)
+  mouseDisplay.style.left = mouseX + 'px'
+  mouseDisplay.style.top = mouseY - 40 + 'px'
+}
+
+function setOpeningTag(str) {
+  let openingTag = "<p class='exampleText'>"
+  if (countLeadingSpaces(str) > 0) {
+    openingTag =
+      "<p class='exampleText' style='margin-left: " + countLeadingSpaces(str) * 10 + "px;'>"
   }
+
+  return openingTag
 }
 
 function resizeTextarea() {
@@ -239,29 +275,35 @@ function resizeTextarea() {
   //formText.style.height = exampleContainer.style.height
 }
 
-function addClick(setting) {
+function addClick() {
   exampleContainer.childNodes.forEach((element) => {
     let spanArray = element.querySelectorAll('span')
     spanArray.forEach((element) => {
-      element.classList.add('hoverable')
-      element.onclick = setting
+      //element.classList.add('hoverable')
+      element.addEventListener('click', spanPressed)
+      element.addEventListener('mouseover', spanHovered)
+      element.addEventListener('mouseleave', resetMouseDisplay)
     })
   })
 }
 
-function formatHTMLText(text) {
-  text = text.replaceAll('<', '&lt;')
-  text = text.replaceAll('>', '&gt;')
+function resetMouseDisplay() {
+  mouseDisplay.classList.add('hide')
+}
+
+function formatText(text) {
+  text = text.replaceAll('<', '&lt')
+  text = text.replaceAll('>', '&gt')
   return text
 }
 
-function generateHTMLText() {
-  htmlContainer.innerHTML = ''
-  exampleContainer.childNodes.forEach((element) => {
-    let outputText = formatHTMLText(element.innerHTML)
-    htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
-  })
-}
+//function generateHTMLText() {
+//  htmlContainer.innerHTML = ''
+//  exampleContainer.childNodes.forEach((element) => {
+//    let outputText = formatHTMLText(element.innerHTML)
+//    htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
+//  })
+//}
 
 function countLeadingSpaces(str) {
   const match = str.match(/^\s*/)
@@ -300,29 +342,81 @@ function resetValues() {
 }
 
 function changeClassButtonPressed() {
-  if (clickSetting === changeClassSpanPressed) {
-    clickSetting = undefined
+  if (clickSetting === 'changeSpanClass') {
+    clickSetting = ''
+    root.style.setProperty('--hover-color', '#ffd90000')
+    classButton.classList.remove('active')
   } else {
-    clickSetting = changeClassSpanPressed
+    clickSetting = 'changeSpanClass'
+    root.style.setProperty('--hover-color', hoverColor)
+    classButton.classList.add('active')
   }
-  highlight(formText.value)
+  //highlight(formText.value)
 }
 
-function changeClassSpanPressed() {
-  this.classList.remove('hoverable')
-  let classIndex = classArray.indexOf(this.classList[0])
-  let newClassIndex = classIndex + 1
-  if (newClassIndex >= classArray.length) {
-    newClassIndex = 0
+function spanPressed() {
+  if (clickSetting === 'changeSpanClass') {
+    //this.classList.remove('hoverable')
+    let classIndex = classArray.indexOf(this.classList[0])
+    let newClassIndex = classIndex + 1
+    if (newClassIndex >= classArray.length) {
+      newClassIndex = 0
+    }
+    this.classList.remove(classArray[classIndex])
+    this.classList.add(classArray[newClassIndex])
+    //this.classList.add('hoverable')
+    //let pIndex = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode)
+    //let spanIndex = Array.prototype.indexOf.call(this.parentNode.children, this)
+    //console.log(`pIndex: ${pIndex}, spanIndex: ${spanIndex}`)
+    //let htmlIndex = getIndexOfSubstringInString(htmlContainer.childNodes[pIndex].innerHTML, '<span')
+    //this.className = ''
+    //this.classList.add(prompt('what class do you want?'))
+    generateHTML()
+    mouseDisplay.className = ''
+    mouseDisplay.innerHTML = this.className
+    mouseDisplay.className = this.className
   }
-  this.classList.remove(classArray[classIndex])
-  this.classList.add(classArray[newClassIndex])
-  this.classList.add('hoverable')
-  generateHTMLText()
-  //this.className = ''
-  //this.classList.add(prompt('what class do you want?'))
 }
 
+function spanHovered() {
+  if (clickSetting === 'changeSpanClass') {
+    mouseDisplay.className = ''
+    mouseDisplay.innerHTML = this.className
+    mouseDisplay.className = this.className
+  }
+}
+
+function generateHTML() {
+  htmlContainer.innerHTML = ''
+  exampleContainer.childNodes.forEach((element) => {
+    let outputText = element.outerHTML
+    outputText = formatText(outputText)
+    htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
+  })
+}
+
+//function getIndexOfSubstringInString(str, subStr, subStrIndex) {
+//  let startIndex = 0
+//  let count = -1
+//  let index = -1
+//  while (count < subStrIndex) {
+//    index = str.indexOf(subStr, startIndex)
+//
+//    if (index === -1) {
+//      // Substring not found, or not enough occurrences
+//      return -1
+//    }
+//
+//    if (count === n) {
+//      return index
+//    }
+//    count++
+//    startIndex = index + subStr.length // Start searching after the found occurrence
+//  }
+//
+//  return -1 // Should not reach here if n > 0 and substring exists
+//}
+//
 //----- Loop Functions -----//
 
 function ifCommentEnd(str) {
@@ -375,7 +469,9 @@ function ifOperator(str) {
     str.includes('/') ||
     str.includes('<') ||
     str.includes('>') ||
-    str.includes('|')
+    str.includes('|') ||
+    str.includes('&lt') ||
+    str.includes('&gt')
   )
 }
 
@@ -417,7 +513,6 @@ function ifFunction(arr, ind) {
       return false
     }
   }
-  console.log('endOfArray')
   return false
 }
 

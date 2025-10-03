@@ -19,29 +19,32 @@
       <aside class="sidenav"></aside>
       <main>
         <h1>Personal Project</h1>
-        <div>
-          <button id="classButton">Change Class</button>
-        </div>
+        <div id="mouseDisplay" class="hide"></div>
         <div id="form-example-container">
-          <div id="form-container">
-            <form>
-              <textarea
-                name="formText"
-                rows="5"
-                cols="40"
-                placeholder="Enter your multi-line text here..."
-                autocomplete="off"
-                id="formText"
-              ></textarea>
-            </form>
+          <div id="button-form-container">
+            <div id="change-container"></div>
+            <div id="form-container">
+              <form>
+                <textarea
+                  name="formText"
+                  rows="5"
+                  cols="40"
+                  placeholder="Enter your multi-line text here..."
+                  autocomplete="off"
+                  id="formText"
+                ></textarea>
+              </form>
+            </div>
           </div>
           <p></p>
-          <div class="example-container" id="exampleContainer"></div>
+          <div id="button-example-container">
+            <div id="change-container">
+              <button id="classButton">Change Class</button>
+              <button id="colorButton">Change Color</button>
+            </div>
+            <div class="example-container" id="exampleContainer"></div>
+          </div>
         </div>
-        <p></p>
-        <form>
-          <input name="customFunctions" id="customFunctionInput" />
-        </form>
         <p></p>
         <div id="htmlContainer"></div>
       </main>

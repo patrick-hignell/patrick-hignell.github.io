@@ -1,3 +1,22 @@
+:root {
+  --hover-color: #000000;
+  --number-color: #b5cea8;
+  --string-color: #ce915e;
+  --keyword-color: #3a8cd6;
+  --function-color: #dcdcaa;
+  --bracket-1-color: #ffd700;
+  --bracket-2-color: #b670d6;
+  --bracket-3-color: #1e6af1;
+  --variable-color: #9cdcf0;
+  --operator-color: white;
+  --conditional-color: #b670d6;
+  --comment-color: #549955;
+  --custom-1-color: #c6462b;
+  --custom-2-color: #d16969;
+  --custom-3-color: #ce834d;
+  --custom-4-color: #d7ba7d;
+}
+
 * {
   /*outline: 1px solid purple;*/
   font-family: 'Eagle lake', georgia;
@@ -42,6 +61,8 @@ textarea {
   font-size: 1.25rem;
   resize: none;
   height: 100%;
+  padding: 20px 20px 0px 20px;
+  min-height: 160px;
 }
 
 input {
@@ -104,11 +125,10 @@ main {
   text-decoration: underline;
 }
 
-/*
 .hide {
   display: none;
 }
-
+/*
 .invisible-font {
   color: rgba(0, 0, 0, 0);
 }
@@ -131,6 +151,28 @@ main {
   padding: 20px;
   margin: auto;
 }
+
+#change-container {
+  display: flex;
+  justify-content: right;
+  min-height: 28px;
+}
+
+#classButton.active {
+  background-color: #c0c0c0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#mouseDisplay {
+  position: absolute;
+  font-family: monospace;
+  font-size: 1.25rem;
+  text-align: left;
+  background-color: black;
+  outline: 2px solid white;
+  padding: 2px 6px;
+}
+
 @media (max-width: 1200px), (max-height: 500px) {
   .container {
     display: block;
@@ -155,7 +197,8 @@ main {
 .example-container {
   background-color: black;
   width: 600px;
-  outline: 1px solid white;
+  min-height: 160px;
+  outline: 2px solid white;
   padding: 20px;
 }
 
@@ -166,6 +209,8 @@ main {
   text-align: left;
   padding: 0px;
   margin: 0px;
+  line-break: auto;
+  overflow-wrap: break-word;
 }
 
 .htmlText {
@@ -187,66 +232,95 @@ main {
 }
 
 .number {
-  color: #b5cea8;
+  color: var(--number-color);
   font-family: monospace;
 }
 
 .string {
-  color: #ce915e;
+  color: var(--string-color);
   font-family: monospace;
 }
 
 .keyword {
-  color: #3a8cd6;
+  color: var(--keyword-color);
   font-family: monospace;
 }
 
 .function {
-  color: #dcdcaa;
+  color: var(--function-color);
   font-family: monospace;
 }
 
 .bracket-1 {
-  color: #ffd700;
+  color: var(--bracket-1-color);
   font-family: monospace;
 }
 
 .bracket-2 {
-  color: #b670d6;
+  color: var(--bracket-2-color);
   font-family: monospace;
 }
 
 .bracket-3 {
-  color: #1e6af1;
+  color: var(--bracket-3-color);
   font-family: monospace;
 }
 
 .variable {
-  color: #9cdcf0;
+  color: var(--variable-color);
   font-family: monospace;
   white-space: pre;
 }
 
-.default {
-  color: #9cdcf0;
-  font-family: monospace;
-}
-
 .operator {
-  color: white;
+  color: var(--operator-color);
   font-family: monospace;
 }
 
 .conditional {
-  color: #b670d6;
+  color: var(--conditional-color);
   font-family: monospace;
 }
 
 .comment {
-  color: #549955;
+  color: var(--comment-color);
   font-family: monospace;
 }
 
-.hoverable:hover {
-  background-color: #ffd90073;
+.custom-1 {
+  color: var(--custom-1-color);
+  font-family: monospace;
+}
+
+.custom-2 {
+  color: var(--custom-2-color);
+  font-family: monospace;
+}
+
+.custom-3 {
+  color: var(--custom-3-color);
+  font-family: monospace;
+}
+
+.custom-4 {
+  color: var(--custom-4-color);
+  font-family: monospace;
+}
+
+.number:hover,
+.string:hover,
+.keyword:hover,
+.function:hover,
+.bracket-1:hover,
+.bracket-2:hover,
+.bracket-3:hover,
+.variable:hover,
+.operator:hover,
+.conditional:hover,
+.comment:hover,
+.custom-1:hover,
+.custom-2:hover,
+.custom-3:hover,
+.custom-4:hover {
+  background-color: var(--hover-color);
 }
