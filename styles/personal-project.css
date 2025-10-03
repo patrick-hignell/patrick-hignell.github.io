@@ -55,7 +55,7 @@ header {
 }
 
 textarea {
-  width: 600px;
+  width: 700px;
   text-align: left;
   font-family: monospace;
   font-size: 1.25rem;
@@ -146,7 +146,7 @@ main {
 
 #htmlContainer {
   background-color: white;
-  width: 1250px;
+  width: 1475px;
   outline: 1px solid black;
   padding: 20px;
   margin: auto;
@@ -158,7 +158,13 @@ main {
   min-height: 28px;
 }
 
-#classButton.active {
+#examples-container {
+  display: flex;
+  justify-content: left;
+  min-height: 28px;
+}
+
+.active {
   background-color: #c0c0c0;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -200,7 +206,7 @@ main {
 
 .example-container {
   background-color: black;
-  width: 600px;
+  width: 700px;
   min-height: 160px;
   outline: 2px solid white;
   padding: 20px;

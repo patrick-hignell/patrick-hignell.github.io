@@ -79,6 +79,13 @@ const classArray = [
   'custom-4',
 ]
 
+const examplesArray = [
+  '// If Example-\nlet amIAConjurerOfCheapTricks = false\nif (amIAConjurerOfCheapTricks == false) {\n  console.log("I am not trying to rob you, I am trying to help you")\n} else {\n  console.log("I am not trying to help you, I am trying to rob you")\n} // will log "I am not trying to rob you, I am trying to help you"]',
+  '// Switch Example-\nlet stubbornness = 5\nswitch (stubbornness) {\n  case 5:\n    console.log("you shall not pass!")\n    break\n  case 4:\n    console.log("you might not pass!")\n    break\n  case 3:\n    console.log("pass or not pass, I dont care!")\n    break\n  case 2:\n    console.log("you could pass if you wanted to!")\n    break\n  case 1:\n    console.log("I would really love it if you would pass!")\n    break\n  default:\n    console.log("I dont know how I feel about you passing!")\n    break\n} // will log "you shall not pass!"',
+  '// Loop Example-\nlet sentenceStart = "Ho"\nlet sentenceMid = "ld the "\nlet sentenceEnd = "door!"\nfor (let i = 0; i <= sentenceMid.length; i++) {\n  let newSentenceMid = sentenceMid.substring(0, sentenceMid.length - i)\n  console.log(sentenceStart + newSentenceMid + sentenceEnd)\n}\n\n// will log "Hold the door!"\n//          "Hold thedoor!"\n//          "Hold thdoor!"\n//          "Hold tdoor!"\n//          "Hold door!"\n//          "Holddoor!"\n//          "Holdoor!"\n//          "Hodoor!"',
+  '// Function Example-\nlet spell = "wingardium leviosaar"\nlet featherFloating = false\nfunction checkSpell(testSpell) {\n  if (testSpell == "wingardium leviosa") {\n    featherFloating = true\n  } else {\n    console.log("Its wingardium leviosa, not " + testSpell + "!")\n  }\n}\ncheckSpell(spell) // will log "Its wingardium leviosa, not wingardium leviosaar!"',
+]
+
 let bracketCount = 0
 let isComment = false
 let commentMarker = ''
@@ -89,6 +96,7 @@ let commentText = ''
 let pText = ''
 let clickSetting
 let hoverColor = '#ffd90070'
+let selectedClass = ''
 const root = document.documentElement
 root.style.setProperty('--hover-color', '#ffd90000')
 
@@ -96,19 +104,33 @@ let formText = document.getElementById('formText')
 //customFunctionInput = document.getElementById('customFunctionInput')
 exampleContainer = document.getElementById('exampleContainer')
 htmlContainer = document.getElementById('htmlContainer')
-classButton = document.getElementById('classButton')
+const buttons = {
+  classButton: document.getElementById('classButton'),
+  colorButton: document.getElementById('colorButton'),
+  example1Button: document.getElementById('example1Button'),
+  example2Button: document.getElementById('example2Button'),
+  example3Button: document.getElementById('example3Button'),
+  example4Button: document.getElementById('example4Button'),
+}
+colorPicker = document.getElementById('colorPicker')
 let mouseDisplay = document.getElementById('mouseDisplay')
-formText.addEventListener('input', (event) => {
-  highlight(event.target.value)
-})
+formText.addEventListener('input', (event) => highlight(event.target.value))
 
 document.addEventListener('mousemove', mouseDisplayMove)
 
-classButton.addEventListener('click', changeClassButtonPressed)
+buttons.classButton.addEventListener('click', () => changeButtonPressed('classButton'))
+buttons.colorButton.addEventListener('click', () => changeButtonPressed('colorButton'))
+buttons.example1Button.addEventListener('click', () => exampleButtonPressed(1))
+buttons.example2Button.addEventListener('click', () => exampleButtonPressed(2))
+buttons.example3Button.addEventListener('click', () => exampleButtonPressed(3))
+buttons.example4Button.addEventListener('click', () => exampleButtonPressed(4))
 
-customFunctionInput.addEventListener('input', (event) => {
-  changeCustomFunctionArray(event.target.value)
-})
+colorPicker.addEventListener('input', (event) =>
+  changeClassColor(selectedClass, event.target.value)
+)
+//customFunctionInput.addEventListener('input', (event) => {
+//  changeCustomFunctionArray(event.target.value)
+//})
 
 //function changeCustomFunctionArray(text) {
 //  customFunctionArray = text.split(',')
@@ -120,6 +142,7 @@ customFunctionInput.addEventListener('input', (event) => {
 //}
 resizeTextarea()
 function highlight(text) {
+  exampleButtonsUnpressed()
   removeSpanListeners()
   exampleContainer.innerHTML = ''
   htmlContainer.innerHTML = ''
@@ -340,22 +363,36 @@ function resetValues() {
   commentText = ''
   pText = ''
 }
-
-function changeClassButtonPressed() {
-  if (clickSetting === 'changeSpanClass') {
+function changeButtonPressed(setting) {
+  if (clickSetting === setting) {
     clickSetting = ''
     root.style.setProperty('--hover-color', '#ffd90000')
-    classButton.classList.remove('active')
+    buttons[setting].classList.remove('active')
   } else {
-    clickSetting = 'changeSpanClass'
+    clickSetting = setting
     root.style.setProperty('--hover-color', hoverColor)
-    classButton.classList.add('active')
+    buttons.classButton.classList.remove('active')
+    buttons.colorButton.classList.remove('active')
+    buttons[setting].classList.add('active')
   }
-  //highlight(formText.value)
+  selectedClass = ''
 }
 
+//function changeClassButtonPressed() {
+//  if (clickSetting === 'changeSpanClass') {
+//    clickSetting = ''
+//    root.style.setProperty('--hover-color', '#ffd90000')
+//    classButton.classList.remove('active')
+//  } else {
+//    clickSetting = 'changeSpanClass'
+//    root.style.setProperty('--hover-color', hoverColor)
+//    classButton.classList.add('active')
+//  }
+//  //highlight(formText.value)
+//}
+
 function spanPressed() {
-  if (clickSetting === 'changeSpanClass') {
+  if (clickSetting === 'classButton') {
     //this.classList.remove('hoverable')
     let classIndex = classArray.indexOf(this.classList[0])
     let newClassIndex = classIndex + 1
@@ -375,11 +412,14 @@ function spanPressed() {
     mouseDisplay.className = ''
     mouseDisplay.innerHTML = this.className
     mouseDisplay.className = this.className
+  } else if (clickSetting === 'colorButton') {
+    colorPicker.value = getComputedStyle(root).getPropertyValue('--' + this.className + '-color')
+    selectedClass = this.className
   }
 }
 
 function spanHovered() {
-  if (clickSetting === 'changeSpanClass') {
+  if (clickSetting === 'classButton') {
     mouseDisplay.className = ''
     mouseDisplay.innerHTML = this.className
     mouseDisplay.className = this.className
@@ -393,6 +433,27 @@ function generateHTML() {
     outputText = formatText(outputText)
     htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
   })
+}
+
+function changeClassColor(thisClass, newColor) {
+  if (selectedClass != '') {
+    root.style.setProperty(`--${thisClass}-color`, newColor)
+  }
+  console.log(selectedClass)
+  console.log(newColor)
+}
+
+function exampleButtonPressed(pressedButton) {
+  formText.value = examplesArray[pressedButton - 1]
+  highlight(formText.value)
+  buttons[`example${pressedButton}Button`].classList.add('active')
+}
+
+function exampleButtonsUnpressed() {
+  buttons.example1Button.classList.remove('active')
+  buttons.example2Button.classList.remove('active')
+  buttons.example3Button.classList.remove('active')
+  buttons.example4Button.classList.remove('active')
 }
 
 //function getIndexOfSubstringInString(str, subStr, subStrIndex) {
