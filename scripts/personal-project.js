@@ -80,10 +80,10 @@ const classArray = [
 ]
 
 const examplesArray = [
-  '// If Example-\nlet amIAConjurerOfCheapTricks = false\nif (amIAConjurerOfCheapTricks == false) {\n  console.log("I am not trying to rob you, I am trying to help you")\n} else {\n  console.log("I am not trying to help you, I am trying to rob you")\n} // will log "I am not trying to rob you, I am trying to help you"]',
-  '// Switch Example-\nlet stubbornness = 5\nswitch (stubbornness) {\n  case 5:\n    console.log("you shall not pass!")\n    break\n  case 4:\n    console.log("you might not pass!")\n    break\n  case 3:\n    console.log("pass or not pass, I dont care!")\n    break\n  case 2:\n    console.log("you could pass if you wanted to!")\n    break\n  case 1:\n    console.log("I would really love it if you would pass!")\n    break\n  default:\n    console.log("I dont know how I feel about you passing!")\n    break\n} // will log "you shall not pass!"',
-  '// Loop Example-\nlet sentenceStart = "Ho"\nlet sentenceMid = "ld the "\nlet sentenceEnd = "door!"\nfor (let i = 0; i <= sentenceMid.length; i++) {\n  let newSentenceMid = sentenceMid.substring(0, sentenceMid.length - i)\n  console.log(sentenceStart + newSentenceMid + sentenceEnd)\n}\n// will log "Hold the door!"\n//          "Hold thedoor!"\n//          "Hold thdoor!"\n//          "Hold tdoor!"\n//          "Hold door!"\n//          "Holddoor!"\n//          "Holdoor!"\n//          "Hodoor!"',
-  '// Function Example-\nlet spell = "wingardium leviosaar"\nlet featherFloating = false\nfunction checkSpell(testSpell) {\n  if (testSpell == "wingardium leviosa") {\n    featherFloating = true\n  } else {\n    console.log("Its wingardium leviosa, not " + testSpell + "!")\n  }\n}\ncheckSpell(spell) // will log "Its wingardium leviosa, not wingardium leviosaar!"',
+  '// If Example //\nlet amIAConjurerOfCheapTricks = false\nif (amIAConjurerOfCheapTricks == false) {\n  console.log("I am not trying to rob you, I am trying to help you")\n} else {\n  console.log("I am not trying to help you, I am trying to rob you")\n} // will log "I am not trying to rob you, I am trying to help you"]',
+  '// Switch Example //\nlet stubbornness = 5\nswitch (stubbornness) {\n  case 5:\n    console.log("you shall not pass!")\n    break\n  case 4:\n    console.log("you might not pass!")\n    break\n  case 3:\n    console.log("pass or not pass, I dont care!")\n    break\n  case 2:\n    console.log("you could pass if you wanted to!")\n    break\n  case 1:\n    console.log("I would really love it if you would pass!")\n    break\n  default:\n    console.log("I dont know how I feel about you passing!")\n    break\n} // will log "you shall not pass!"',
+  '// Loop Example //\nlet sentenceStart = "Ho"\nlet sentenceMid = "ld the "\nlet sentenceEnd = "door!"\nfor (let i = 0; i <= sentenceMid.length; i++) {\n  let newSentenceMid = sentenceMid.substring(0, sentenceMid.length - i)\n  console.log(sentenceStart + newSentenceMid + sentenceEnd)\n}\n// will log "Hold the door!"\n//          "Hold thedoor!"\n//          "Hold thdoor!"\n//          "Hold tdoor!"\n//          "Hold door!"\n//          "Holddoor!"\n//          "Holdoor!"\n//          "Hodoor!"',
+  '// Function Example //\nlet spell = "wingardium leviosaar"\nlet featherFloating = false\nfunction checkSpell(testSpell) {\n  if (testSpell == "wingardium leviosa") {\n    featherFloating = true\n  } else {\n    console.log("Its wingardium leviosa, not " + testSpell + "!")\n  }\n}\ncheckSpell(spell) // will log "Its wingardium leviosa, not wingardium leviosaar!"',
 ]
 
 let bracketCount = 0
@@ -94,7 +94,7 @@ let quotationMarker = ''
 let quotationText = ''
 let commentText = ''
 let pText = ''
-let clickSetting
+let clickSetting = ''
 let hoverColor = '#ffd90070'
 let selectedClass = ''
 const root = document.documentElement
@@ -440,8 +440,6 @@ function changeClassColor(thisClass, newColor) {
   if (selectedClass != '') {
     root.style.setProperty(`--${thisClass}-color`, newColor)
   }
-  console.log(selectedClass)
-  console.log(newColor)
 }
 
 function exampleButtonPressed(pressedButton) {
