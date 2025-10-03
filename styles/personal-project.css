@@ -163,6 +163,10 @@ main {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+#colorPicker {
+  width: 40px;
+}
+
 #mouseDisplay {
   position: absolute;
   font-family: monospace;
@@ -269,7 +273,6 @@ main {
 .variable {
   color: var(--variable-color);
   font-family: monospace;
-  white-space: pre;
 }
 
 .operator {
