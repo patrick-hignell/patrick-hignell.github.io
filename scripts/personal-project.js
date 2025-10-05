@@ -2,7 +2,7 @@ let currentPage = document.getElementsByTagName('title')[0].innerHTML
 let isIndex = false
 
 let navList = [
-  { name: 'Home', link: 'index.html' },
+  { name: 'Home', link: '../index.html' },
   { name: 'Te-Houtaewa', link: 'te-houtaewa-template.html' },
   { name: 'CSS - Display', link: 'html-css.html' },
   { name: 'Identity & Values', link: 'identity-values.html' },
@@ -17,18 +17,9 @@ let navList = [
   { name: 'Personal Project', link: 'personal-project.html' },
 ]
 
-editNavList() // makes changes to links in navList depending if index or blog
 populateSidenav() // adds navList links to sideNav
 
 // ------- Functions ------- //
-
-function editNavList() {
-  navList.forEach(function (element, index) {
-    if (index !== 0) {
-      element.link = 'blog/' + element.link
-    }
-  })
-}
 
 function populateSidenav() {
   let sidenavParent = document.getElementsByClassName('sidenav')[0]
@@ -42,6 +33,17 @@ function addNewSidenavLink(fparent, ftext, flink) {
   fparent.appendChild(fchild)
   fchild.innerHTML = ftext
   fchild.href = flink
+}
+
+let scrollArray = [document.getElementById('scrollHandle'), document.getElementById('bottomHandle')]
+
+scrollArray.forEach((element) => {
+  element.onclick = scrollInteract
+})
+
+function scrollInteract() {
+  let scrollContainer = document.getElementById('scrollContainer')
+  scrollContainer.classList.toggle('hide')
 }
 
 //----- JavaScript Display -----//
@@ -80,10 +82,11 @@ const classArray = [
 ]
 
 const examplesArray = [
-  '// If Example //\nlet amIAConjurerOfCheapTricks = false\nif (amIAConjurerOfCheapTricks == false) {\n  console.log("I am not trying to rob you, I am trying to help you")\n} else {\n  console.log("I am not trying to help you, I am trying to rob you")\n} // will log "I am not trying to rob you, I am trying to help you"]',
-  '// Switch Example //\nlet stubbornness = 5\nswitch (stubbornness) {\n  case 5:\n    console.log("you shall not pass!")\n    break\n  case 4:\n    console.log("you might not pass!")\n    break\n  case 3:\n    console.log("pass or not pass, I dont care!")\n    break\n  case 2:\n    console.log("you could pass if you wanted to!")\n    break\n  case 1:\n    console.log("I would really love it if you would pass!")\n    break\n  default:\n    console.log("I dont know how I feel about you passing!")\n    break\n} // will log "you shall not pass!"',
-  '// Loop Example //\nlet sentenceStart = "Ho"\nlet sentenceMid = "ld the "\nlet sentenceEnd = "door!"\nfor (let i = 0; i <= sentenceMid.length; i++) {\n  let newSentenceMid = sentenceMid.substring(0, sentenceMid.length - i)\n  console.log(sentenceStart + newSentenceMid + sentenceEnd)\n}\n// will log "Hold the door!"\n//          "Hold thedoor!"\n//          "Hold thdoor!"\n//          "Hold tdoor!"\n//          "Hold door!"\n//          "Holddoor!"\n//          "Holdoor!"\n//          "Hodoor!"',
-  '// Function Example //\nlet spell = "wingardium leviosaar"\nlet featherFloating = false\nfunction checkSpell(testSpell) {\n  if (testSpell == "wingardium leviosa") {\n    featherFloating = true\n  } else {\n    console.log("Its wingardium leviosa, not " + testSpell + "!")\n  }\n}\ncheckSpell(spell) // will log "Its wingardium leviosa, not wingardium leviosaar!"',
+  '// If Example //\n\nlet amIAConjurerOfCheapTricks = false\n\nif (amIAConjurerOfCheapTricks == false) {\n  console.log("I am not trying to rob you, I am trying to help you")\n} else {\n  console.log("I am not trying to help you, I am trying to rob you")\n}\n\n// will log "I am not trying to rob you, I am trying to help you"',
+  '// Switch Example //\n\nlet stubbornness = 5\n\nswitch (stubbornness) {\n  case 5:\n    console.log("you shall not pass!")\n    break\n  case 4:\n    console.log("you might not pass!")\n    break\n  case 3:\n    console.log("pass or not pass, I dont care!")\n    break\n  case 2:\n    console.log("you could pass if you wanted to!")\n    break\n  case 1:\n    console.log("I would really love it if you would pass!")\n    break\n  default:\n    console.log("I dont know how I feel about you passing!")\n    break\n}\n\n// will log "you shall not pass!"',
+  '// Loop Example //\n\nlet sentenceStart = "Ho"\nlet sentenceMid = "ld the "\nlet sentenceEnd = "door!"\n\nfor (let i = 0; i <= sentenceMid.length; i++) {\n  let newSentenceMid = sentenceMid.substring(0, sentenceMid.length - i)\n  console.log(sentenceStart + newSentenceMid + sentenceEnd)\n}\n\n// will log "Hold the door!"\n//          "Hold thedoor!"\n//          "Hold thdoor!"\n//          "Hold tdoor!"\n//          "Hold door!"\n//          "Holddoor!"\n//          "Holdoor!"\n//          "Hodoor!"',
+  '// Function Example //\n\nlet spell = "wingardium leviosaar"\nlet featherFloating = false\n\nfunction checkSpell(testSpell) {\n  if (testSpell == "wingardium leviosa") {\n    featherFloating = true\n  } else {\n    console.log("Its wingardium leviosa, not " + testSpell + "!")\n  }\n}\n\ncheckSpell(spell)\n\n// will log "Its wingardium leviosa, not wingardium leviosaar!"',
+  '// ForEach Example //\n\nconst theRingVerse = [\n  "3 Rings for the Elven-kings under the sky, ",\n  "7 for the Dwarf-lords in their halls of stone, ",\n  "9 for Mortal Men doomed to die, ",\n  "1 for the Dark Lord on his dark throne; ",\n  "In the Land of Mordor where the Shadows lie.",\n]\n\nfunction countIntsInArray(stringArray, unit) {\n  let unitCount = 0\n  stringArray.forEach(function (string) {\n    if (isNaN(parseInt(string)) == false) {\n      unitCount += parseInt(string)\n    }\n  })\n  return "There are " + unitCount + " "  + unit + " in total"\n}\n\nconsole.log(countIntsInArray(theRingVerse,"rings"))\n\n// will log "There are 20 rings in total"',
 ]
 
 let bracketCount = 0
@@ -97,6 +100,7 @@ let pText = ''
 let clickSetting = ''
 let hoverColor = '#ffd90070'
 let selectedClass = ''
+let addContainer = true
 const root = document.documentElement
 root.style.setProperty('--hover-color', '#ffd90000')
 
@@ -104,6 +108,7 @@ let formText = document.getElementById('formText')
 //customFunctionInput = document.getElementById('customFunctionInput')
 let exampleContainer = document.getElementById('exampleContainer')
 let htmlContainer = document.getElementById('htmlContainer')
+let cssContainer = document.getElementById('cssContainer')
 const buttons = {
   classButton: document.getElementById('classButton'),
   colorButton: document.getElementById('colorButton'),
@@ -111,7 +116,58 @@ const buttons = {
   example2Button: document.getElementById('example2Button'),
   example3Button: document.getElementById('example3Button'),
   example4Button: document.getElementById('example4Button'),
+  example5Button: document.getElementById('example5Button'),
+  addContainerButton: document.getElementById('addContainerButton'),
+  copyHtmlButton: document.getElementById('copyHtmlButton'),
+  copyCssButton: document.getElementById('copyCssButton'),
 }
+
+const colorCodes = [
+  { id: 'number', css: 'number', element: document.getElementById('numberColorCode') },
+  { id: 'string', css: 'string', element: document.getElementById('stringColorCode') },
+  { id: 'keyword', css: 'keyword', element: document.getElementById('keywordColorCode') },
+  {
+    id: 'function',
+    css: 'function',
+    element: document.getElementById('functionColorCode'),
+  },
+  {
+    id: 'bracket1',
+    css: 'bracket-1',
+    element: document.getElementById('bracket1ColorCode'),
+  },
+  {
+    id: 'bracket2',
+    css: 'bracket-2',
+    element: document.getElementById('bracket2ColorCode'),
+  },
+  {
+    id: 'bracket3',
+    css: 'bracket-3',
+    element: document.getElementById('bracket3ColorCode'),
+  },
+  {
+    id: 'variable',
+    css: 'variable',
+    element: document.getElementById('variableColorCode'),
+  },
+  {
+    id: 'operator',
+    css: 'operator',
+    element: document.getElementById('operatorColorCode'),
+  },
+  {
+    id: 'conditional',
+    css: 'conditional',
+    element: document.getElementById('conditionalColorCode'),
+  },
+  { id: 'comment', css: 'comment', element: document.getElementById('commentColorCode') },
+  { id: 'custom1', css: 'custom-1', element: document.getElementById('custom1ColorCode') },
+  { id: 'custom2', css: 'custom-2', element: document.getElementById('custom2ColorCode') },
+  { id: 'custom3', css: 'custom-3', element: document.getElementById('custom3ColorCode') },
+  { id: 'custom4', css: 'custom-4', element: document.getElementById('custom4ColorCode') },
+]
+
 let colorPicker = document.getElementById('colorPicker')
 let mouseDisplay = document.getElementById('mouseDisplay')
 
@@ -125,6 +181,10 @@ buttons.example1Button.addEventListener('click', () => exampleButtonPressed(1))
 buttons.example2Button.addEventListener('click', () => exampleButtonPressed(2))
 buttons.example3Button.addEventListener('click', () => exampleButtonPressed(3))
 buttons.example4Button.addEventListener('click', () => exampleButtonPressed(4))
+buttons.example5Button.addEventListener('click', () => exampleButtonPressed(5))
+buttons.addContainerButton.addEventListener('click', addContainerButtonPressed)
+buttons.copyHtmlButton.addEventListener('click', () => copyText(htmlContainer.innerText))
+buttons.copyCssButton.addEventListener('click', () => copyText(cssContainer.innerText))
 
 colorPicker.addEventListener('input', (event) =>
   changeClassColor(selectedClass, event.target.value)
@@ -142,6 +202,7 @@ colorPicker.addEventListener('input', (event) =>
 //  highlight(formText.value)
 //}
 resizeTextarea()
+getCodeColors()
 function highlight(text) {
   exampleButtonsUnpressed()
   removeSpanListeners()
@@ -155,6 +216,9 @@ function highlight(text) {
       let openingTag = setOpeningTag(textArray[i])
       textArray[i] = formatText(textArray[i])
       let pArray = formatArray(textArray[i].trim())
+      if (pArray.length === 0) {
+        pArray.push('&nbsp')
+      }
       for (let j = 0; j < pArray.length; j++) {
         let index = j
         let currentString = pArray[j]
@@ -239,7 +303,7 @@ function highlight(text) {
         }
 
         if (ifSpace(currentString)) {
-          pText += ' '
+          pText += '&nbsp'
           continue
         }
 
@@ -254,11 +318,34 @@ function highlight(text) {
       let outputText = openingTag + pText + '</p>'
       exampleContainer.innerHTML += outputText
       outputText = formatText(outputText)
+      outputText = outputText.replaceAll(';', '&semi;')
       htmlContainer.innerHTML += "<p class='htmlText'>" + outputText + '</p>'
     }
   }
+  if (addContainer == true) {
+    addHtmlContainer()
+  }
   resizeTextarea()
   addClick()
+}
+
+function addHtmlContainer() {
+  if (formText.value !== '') {
+    htmlContainer.innerHTML =
+      "<p class='htmlText'>" +
+      formatText("<div class='javascript-display-container'>") +
+      '</p>' +
+      htmlContainer.innerHTML
+    htmlContainer.innerHTML += "<p class='htmlText'>" + formatText('</div>') + '</p>'
+  } else {
+    htmlContainer.innerHTML = ''
+  }
+}
+
+function addContainerButtonPressed() {
+  addContainer = !addContainer
+  buttons.addContainerButton.classList.toggle('active')
+  highlight(formText.value)
 }
 
 function removeSpanListeners() {
@@ -393,7 +480,7 @@ function changeButtonPressed(setting) {
 //}
 
 function spanPressed() {
-  if (clickSetting === 'classButton') {
+  if (clickSetting === 'classButton' && this.id.includes('ColorCode') === false) {
     //this.classList.remove('hoverable')
     let classIndex = classArray.indexOf(this.classList[0])
     let newClassIndex = classIndex + 1
@@ -416,6 +503,7 @@ function spanPressed() {
   } else if (clickSetting === 'colorButton') {
     colorPicker.value = getComputedStyle(root).getPropertyValue('--' + this.className + '-color')
     selectedClass = this.className
+    colorPicker.showPicker()
   }
 }
 
@@ -439,7 +527,18 @@ function generateHTML() {
 function changeClassColor(thisClass, newColor) {
   if (selectedClass != '') {
     root.style.setProperty(`--${thisClass}-color`, newColor)
+    let code = colorCodes.find((thisCode) => thisCode.css === thisClass)
+    code.element.innerHTML = newColor
   }
+}
+
+function getCodeColors() {
+  colorCodes.forEach((code) => {
+    code.element.innerHTML = getComputedStyle(root).getPropertyValue('--' + code.css + '-color')
+    code.element.addEventListener('click', spanPressed)
+    code.element.addEventListener('mouseover', spanHovered)
+    code.element.addEventListener('mouseleave', resetMouseDisplay)
+  })
 }
 
 function exampleButtonPressed(pressedButton) {
@@ -453,7 +552,30 @@ function exampleButtonsUnpressed() {
   buttons.example2Button.classList.remove('active')
   buttons.example3Button.classList.remove('active')
   buttons.example4Button.classList.remove('active')
+  buttons.example5Button.classList.remove('active')
 }
+
+function copyText(text) {
+  //element.innerHTML.select()
+  //element.innerHTML.setSelectionRange(0, 99999)
+  text = text.replace(/(\r\n|\n\n|\r\r)/gm, '\n')
+  //text = text.replace(/(\rs\n|\ns\n|\rs\r)/gm, '\n')
+  navigator.clipboard.writeText(text)
+}
+
+//async function pasteText() {
+//  try {
+//    const clipText = await navigator.clipboard.readText()
+//    formText.value += clipText
+//    highlight(formText.value)
+//  } catch (err) {
+//    console.error('Failed to read clipboard contents: ', err)
+//    // Handle potential errors, e.g., permission denied or no text in clipboard
+//    alert(
+//      'Could not paste from clipboard. Please ensure you have copied text and granted clipboard access if prompted.'
+//    )
+//  }
+//}
 
 //function getIndexOfSubstringInString(str, subStr, subStrIndex) {
 //  let startIndex = 0

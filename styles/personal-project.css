@@ -8,7 +8,7 @@
   --bracket-2-color: #b670d6;
   --bracket-3-color: #1e6af1;
   --variable-color: #9cdcf0;
-  --operator-color: white;
+  --operator-color: #ffffff;
   --conditional-color: #b670d6;
   --comment-color: #549955;
   --custom-1-color: #c6462b;
@@ -125,15 +125,37 @@ main {
   text-decoration: underline;
 }
 
+.scroll-handle {
+  background-image: url(../assets/scroll-handle.png);
+  background-size: 100% 100%;
+  padding: 40px 0px 60px;
+  width: 90%;
+  margin: -70px auto;
+  min-width: 750px;
+}
+
+.scroll-container {
+  background-image: url(../assets/scroll-div-background-4.png);
+  width: 90%;
+  margin: -70px auto;
+  background-size: 100% 100%;
+  z-index: -1;
+  position: relative;
+  min-width: 750px;
+}
+
+.scroll-inner-container {
+  width: 70%;
+  margin: 20px auto;
+}
+
 .hide {
   display: none;
 }
-/*
+
 .invisible-font {
   color: rgba(0, 0, 0, 0);
 }
-
-*/
 
 #volcano-header {
   background-image: url(../assets/mount-doom-background.png);
@@ -146,9 +168,17 @@ main {
 
 #htmlContainer {
   background-color: white;
-  width: 1475px;
   outline: 1px solid black;
   padding: 20px;
+}
+
+#buttonHtmlContainer {
+  width: 93%;
+  margin: auto;
+}
+
+#buttonCssContainer {
+  width: 93%;
   margin: auto;
 }
 
@@ -158,10 +188,14 @@ main {
   min-height: 28px;
 }
 
-#examples-container {
+.buttons-container {
   display: flex;
-  justify-content: left;
+  justify-content: flex-end;
   min-height: 28px;
+}
+
+.copyPasteButton {
+  margin-right: auto;
 }
 
 .active {
@@ -212,17 +246,6 @@ main {
   padding: 20px;
 }
 
-.exampleText {
-  color: white;
-  font-family: monospace;
-  font-size: 1.25rem;
-  text-align: left;
-  padding: 0px;
-  margin: 0px;
-  line-break: auto;
-  overflow-wrap: break-word;
-}
-
 .htmlText {
   color: black;
   font-family: monospace;
@@ -241,79 +264,92 @@ main {
   margin: 5px;
 }
 
+.exampleText {
+  font-family: monospace;
+  font-size: 1.25rem;
+  text-align: left;
+  padding: 0px;
+  margin: 0px;
+  line-break: auto;
+  overflow-wrap: break-word;
+}
+
+.exampleText > span {
+  font-family: inherit;
+}
+
+.javascript-display-container {
+  background-color: black;
+  width: 91%;
+  margin: auto;
+  min-height: 160px;
+  outline: 2px solid white;
+  padding: 20px;
+}
+
+#cssContainer {
+  width: 98%;
+  margin: auto;
+}
+
 .number {
   color: var(--number-color);
-  font-family: monospace;
 }
 
 .string {
   color: var(--string-color);
-  font-family: monospace;
 }
 
 .keyword {
   color: var(--keyword-color);
-  font-family: monospace;
 }
 
 .function {
   color: var(--function-color);
-  font-family: monospace;
 }
 
 .bracket-1 {
   color: var(--bracket-1-color);
-  font-family: monospace;
 }
 
 .bracket-2 {
   color: var(--bracket-2-color);
-  font-family: monospace;
 }
 
 .bracket-3 {
   color: var(--bracket-3-color);
-  font-family: monospace;
 }
 
 .variable {
   color: var(--variable-color);
-  font-family: monospace;
 }
 
 .operator {
   color: var(--operator-color);
-  font-family: monospace;
 }
 
 .conditional {
   color: var(--conditional-color);
-  font-family: monospace;
 }
 
 .comment {
   color: var(--comment-color);
-  font-family: monospace;
 }
 
 .custom-1 {
   color: var(--custom-1-color);
-  font-family: monospace;
 }
 
 .custom-2 {
   color: var(--custom-2-color);
-  font-family: monospace;
 }
 
 .custom-3 {
   color: var(--custom-3-color);
-  font-family: monospace;
 }
 
 .custom-4 {
   color: var(--custom-4-color);
-  font-family: monospace;
 }
 
 .number:hover,
@@ -332,4 +368,8 @@ main {
 .custom-3:hover,
 .custom-4:hover {
   background-color: var(--hover-color);
+}
+
+#cssContainer > p > span:hover {
+  background-color: #ffd90000;
 }

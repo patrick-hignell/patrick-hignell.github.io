@@ -18,15 +18,55 @@
     <div class="container">
       <aside class="sidenav"></aside>
       <main>
-        <h1>Personal Project</h1>
+        <h1></h1>
+        <h1></h1>
+        <h1 class="scroll-handle" id="scrollHandle">Personal Project</h1>
+        <div class="scroll-container hide" id="scrollContainer">
+          <div class="scroll-inner-container">
+            <p>
+              <br />&nbsp; For my personal project, I continued work on a tool that I had started
+              working on during the Javascript-DOM lesson. I wanted to display examples of
+              JavaScript using HTML, with all of the syntax highlighted as it is on Visual Studio
+              Code. The problem I found was that in order to do so, I would have to create a large
+              number of span elements with different classes corresponding to the relevant colours
+              in a CSS document. Doing this manually took a long time, so I wanted to make a tool
+              which I could input JavaScript code and it would output HTML code with the appropriate
+              classes assigned.
+            </p>
+            <p>
+              The function takes in the value of the textarea, turns it in to an array of
+              words/characters, then cycles through each array index and subjects it to a series of
+              tests to see which class it should belong to. It is then added to the innerHTML of the
+              JavaScript display as a span element with the appropriate class. Finally, the
+              outerHTML is then added to the HTML display, each line contained within a p element.
+            </p>
+            <p>
+              There are still plenty of instances in which the function does not tag appropriately
+              (two known examples are functions not followed by brackets and regex expressions
+              although I am sure there are others!) so I have added functionality to manually change
+              the classes in the JavaScript display by toggling the change class button and clicking
+              on the relevant span element. I also added a change color button in case you want to
+              change the colour of a class (with 4 custom classes in addition to the usual ones).
+            </p>
+            <p>
+              Finally, I added copy buttons to easily copy the HTML code (with or without a
+              container) and the CSS code, so that it can be pasted in to Visual Studio Code. You
+              can start a new project and try it out for yourself!<br />&nbsp;
+            </p>
+          </div>
+        </div>
+        <h1 class="scroll-handle" id="bottomHandle">JavaScript Display</h1>
+        <h1></h1>
+        <h1></h1>
         <div id="mouseDisplay" class="hide"></div>
         <div id="form-example-container">
           <div id="button-form-container">
-            <div id="examples-container">
+            <div id="examples-container" class="buttons-container">
               <button id="example1Button">Example 1</button>
               <button id="example2Button">Example 2</button>
               <button id="example3Button">Example 3</button>
               <button id="example4Button">Example 4</button>
+              <button id="example5Button">Example 5</button>
             </div>
             <div id="form-container">
               <form>
@@ -42,17 +82,447 @@
             </div>
           </div>
           <p></p>
-          <div id="button-example-container">
-            <div id="change-container">
+          <div>
+            <div class="buttons-container">
               <button id="classButton">Change Class</button>
               <button id="colorButton">Change Color</button>
-              <input type="color" id="colorPicker" value="#ff0000" />
+              <input type="color" id="colorPicker" class="hide" value="#ff0000" />
             </div>
             <div class="example-container" id="exampleContainer"></div>
           </div>
         </div>
-        <p></p>
-        <div id="htmlContainer"></div>
+        <h2>HTML:</h2>
+        <div id="buttonHtmlContainer">
+          <div class="buttons-container">
+            <button id="copyHtmlButton" class="copyPasteButton">Copy</button>
+            <button id="addContainerButton" class="active">Add Container</button>
+          </div>
+          <div id="htmlContainer"></div>
+        </div>
+        <h2>CSS:</h2>
+        <div id="buttonCssContainer">
+          <div class="buttons-container">
+            <button id="copyCssButton" class="copyPasteButton">Copy</button>
+          </div>
+          <div id="cssContainer" class="javascript-display-container">
+            <p class="exampleText">
+              <span class="custom-4">:root</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--number-color</span><span class="operator">:</span>
+              <span class="number" id="numberColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--string-color</span><span class="operator">:</span>
+              <span class="string" id="stringColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--keyword-color</span><span class="operator">:</span>
+              <span class="keyword" id="keywordColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--function-color</span><span class="operator">:</span>
+              <span class="function" id="functionColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--bracket-1-color</span><span class="operator">:</span>
+              <span class="bracket-1" id="bracket1ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--bracket-2-color</span><span class="operator">:</span>
+              <span class="bracket-2" id="bracket2ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--bracket-3-color</span><span class="operator">:</span>
+              <span class="bracket-3" id="bracket3ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--variable-color</span><span class="operator">:</span>
+              <span class="variable" id="variableColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--operator-color</span><span class="operator">:</span>
+              <span class="operator" id="operatorColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--conditional-color</span><span class="operator">:</span>
+              <span class="conditional" id="conditionalColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--comment-color</span><span class="operator">:</span>
+              <span class="comment" id="commentColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--custom-1-color</span><span class="operator">:</span>
+              <span class="custom-1" id="custom1ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--custom-2-color</span><span class="operator">:</span>
+              <span class="custom-2" id="custom2ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--custom-3-color</span><span class="operator">:</span>
+              <span class="custom-3" id="custom3ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">--custom-4-color</span><span class="operator">:</span>
+              <span class="custom-4" id="custom4ColorCode">#000000</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">javascript</span
+              ><span class="custom-4">-</span><span class="custom-4">display</span
+              ><span class="custom-4">-</span><span class="custom-4">container</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">background</span><span class="operator">-</span
+              ><span class="variable">color</span><span class="operator">:</span> <span
+                class="custom-3"
+                >black</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">width</span><span class="operator">:</span> <span
+                class="number"
+                >91%</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">margin</span><span class="operator">:</span> <span
+                class="custom-3"
+                >auto</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">min</span><span class="variable">-</span
+              ><span class="variable">height</span><span class="operator">:</span> <span
+                class="number"
+                >160px</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">outline</span><span class="operator">:</span> <span
+                class="number"
+                >2px</span
+              > <span class="custom-3">solid</span> <span class="custom-3">white</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">padding</span><span class="operator">:</span> <span
+                class="number"
+                >20px</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">exampleText</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">font</span><span class="variable">-</span
+              ><span class="variable">family</span><span class="operator">:</span>
+              <span class="custom-3">monospace</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">font</span><span class="variable">-</span
+              ><span class="variable">size</span><span class="operator">:</span>
+              <span class="number">1</span><span class="number">.</span
+              ><span class="number">25rem</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">text</span><span class="variable">-</span
+              ><span class="variable">align</span><span class="operator">:</span>
+              <span class="custom-3">left</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">padding</span><span class="operator">:</span>
+              <span class="number">0px</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">margin</span><span class="operator">:</span>
+              <span class="number">0px</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">line</span><span class="variable">-</span
+              ><span class="variable">break</span><span class="operator">:</span>
+              <span class="custom-3">auto</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">overflow</span><span class="variable">-</span
+              ><span class="variable">wrap</span><span class="operator">:</span>
+              <span class="custom-3">break</span><span class="custom-3">-</span
+              ><span class="custom-3">word</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">exampleText</span>
+              <span class="operator">></span> <span class="custom-4">span</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">font</span><span class="variable">-</span
+              ><span class="variable">family</span><span class="operator">:</span>
+              <span class="custom-3">inherit</span><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">number</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--number-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">string</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--string-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">keyword</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--keyword-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">function</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--function-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">bracket</span
+              ><span class="custom-4">-</span><span class="custom-4">1</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--bracket-1-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">bracket</span
+              ><span class="custom-4">-</span><span class="custom-4">2</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--bracket-2-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">bracket</span
+              ><span class="custom-4">-</span><span class="custom-4">3</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--bracket-3-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">variable</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--variable-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">operator</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--operator-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">conditional</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--conditional-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">comment</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--comment-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">custom</span
+              ><span class="custom-4">-</span><span class="custom-4">1</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--custom-1-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">custom</span
+              ><span class="custom-4">-</span><span class="custom-4">2</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--custom-2-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">custom</span
+              ><span class="custom-4">-</span><span class="custom-4">3</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--custom-3-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+
+            <p class="exampleText">
+              <span class="custom-4">.</span><span class="custom-4">custom</span
+              ><span class="custom-4">-</span><span class="custom-4">4</span>
+              <span class="bracket-1">{</span>
+            </p>
+
+            <p class="exampleText" style="margin-left: 20px">
+              <span class="variable">color</span><span class="operator">:</span>
+              <span class="function">var</span><span class="bracket-2">(</span
+              ><span class="variable">--custom-4-color</span><span class="bracket-2">)</span
+              ><span class="operator">;</span>
+            </p>
+
+            <p class="exampleText"><span class="bracket-1">}</span></p>
+          </div>
+        </div>
       </main>
     </div>
     <script src="../scripts/personal-project.js"></script>
