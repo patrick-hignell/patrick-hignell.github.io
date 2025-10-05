@@ -26,32 +26,33 @@
             <p>
               <br />&nbsp; For my personal project, I continued work on a tool that I had started
               working on during the Javascript-DOM lesson. I wanted to display examples of
-              JavaScript using HTML, with all of the syntax highlighted as it is on Visual Studio
+              JavaScript using HTML with all of the syntax highlighted as it is on Visual Studio
               Code. The problem I found was that in order to do so, I would have to create a large
-              number of span elements with different classes corresponding to the relevant colours
-              in a CSS document. Doing this manually took a long time, so I wanted to make a tool
-              which I could input JavaScript code and it would output HTML code with the appropriate
-              classes assigned.
+              number of span elements with different classes corresponding to different CSS
+              rulesets. Doing this manually took a long time, so I wanted to make a tool which I
+              could input JavaScript code and then output HTML code, automaticaaly creating elements
+              with the appropriate classes already assigned.
             </p>
             <p>
-              The function takes in the value of the textarea, turns it in to an array of
+              The function below takes in the value of the textarea, turns it in to an array of
               words/characters, then cycles through each array index and subjects it to a series of
               tests to see which class it should belong to. It is then added to the innerHTML of the
-              JavaScript display as a span element with the appropriate class. Finally, the
+              JavaScript display as a span element with the appropriate class assigned. Finally, the
               outerHTML is then added to the HTML display, each line contained within a p element.
             </p>
             <p>
-              There are still plenty of instances in which the function does not tag appropriately
-              (two known examples are functions not followed by brackets and regex expressions
-              although I am sure there are others!) so I have added functionality to manually change
-              the classes in the JavaScript display by toggling the change class button and clicking
-              on the relevant span element. I also added a change color button in case you want to
-              change the colour of a class (with 4 custom classes in addition to the usual ones).
+              There are still plenty of instances in which the function does not assign classes
+              appropriately (two known examples are function names not followed by brackets and
+              regex expressions, although I am sure there are others!) so I have added functionality
+              to manually change the classes in the JavaScript display by toggling the change class
+              button and clicking on the relevant span element. I also added a change color button
+              in case you want to change the colour of an entire class (with 4 custom classes in
+              addition to the usual ones).
             </p>
             <p>
               Finally, I added copy buttons to easily copy the HTML code (with or without a
-              container) and the CSS code, so that it can be pasted in to Visual Studio Code. You
-              can start a new project and try it out for yourself!<br />&nbsp;
+              container) as well as the CSS code, so that it can be pasted straight in to Visual
+              Studio Code. You can start a new project and try it out for yourself!<br />&nbsp;
             </p>
           </div>
         </div>
@@ -74,7 +75,7 @@
                   name="formText"
                   rows="5"
                   cols="40"
-                  placeholder="Enter or paste your code here..."
+                  placeholder="Enter / paste your code here or click on an example..."
                   autocomplete="off"
                   id="formText"
                 ></textarea>
