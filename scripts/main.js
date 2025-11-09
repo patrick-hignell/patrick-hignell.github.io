@@ -35,6 +35,24 @@ if (document.getElementsByTagName('title')[0].innerHTML === 'Learning Plan') {
   foundationsArray.forEach((element) => {
     element.onclick = scrollInteractFoundations
   })
+
+  let reflectionsArray = [
+    document.getElementById('reflectionsScrollHandle'),
+    document.getElementById('reflectionsBottomHandle'),
+  ]
+
+  reflectionsArray.forEach((element) => {
+    element.onclick = () => scrollInteract('reflectionsScrollContainer')
+  })
+
+  let updatesArray = [
+    document.getElementById('updatesScrollHandle'),
+    document.getElementById('updatessBottomHandle'),
+  ]
+
+  updatesArray.forEach((element) => {
+    element.onclick = () => scrollInteract('updatesScrollContainer')
+  })
 }
 
 checkIfIsIndex() // if page is index.html, isIndex = true
@@ -50,6 +68,11 @@ function scrollInteractBootcamp() {
 
 function scrollInteractFoundations() {
   let container = document.getElementById('foundationsScrollContainer')
+  container.classList.toggle('hide')
+}
+
+function scrollInteract(id) {
+  let container = document.getElementById(id)
   container.classList.toggle('hide')
 }
 
