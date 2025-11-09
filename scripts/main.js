@@ -47,7 +47,7 @@ if (document.getElementsByTagName('title')[0].innerHTML === 'Learning Plan') {
 
   let updatesArray = [
     document.getElementById('updatesScrollHandle'),
-    document.getElementById('updatessBottomHandle'),
+    document.getElementById('updatesBottomHandle'),
   ]
 
   updatesArray.forEach((element) => {
