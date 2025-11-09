@@ -73,6 +73,7 @@ function scrollInteractFoundations() {
 
 function scrollInteract(id) {
   let container = document.getElementById(id)
+  console.log(container)
   container.classList.toggle('hide')
 }
 
